@@ -1,4 +1,5 @@
 package Character;
+import Equipment.Equipment;
 
 public abstract class Character {
     protected enum Category {
@@ -20,14 +21,15 @@ public abstract class Character {
         this.health += 0.1*healing_power;
     }
 
-    public void equipment(int attack, int defense, int health, int speed, int price){
-        this.attack += attack;
-        this.defense += defense;
-        this.health += health;
-        this.speed += speed;
-        this.price += price*0.2;
+    public void equipment(Equipment equipment){
+        this.attack += equipment.attack;
+        this.defense += equipment.defense;
+        this.health += equipment.health;
+        this.speed += equipment.speed;
+        this.price += equipment.price*0.2;
     }
 
+    
     public void setBattleGround(String battleGround){
         switch (battleGround) {
             case "Hillcrest":
