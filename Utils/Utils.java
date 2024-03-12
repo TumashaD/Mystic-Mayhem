@@ -95,6 +95,9 @@ public class Utils {
             choice = input.nextInt();
         }
         Utils.clearScreen();
+        if (choice == 2){
+            Utils.createProfile();
+        }
     }
 
 }
