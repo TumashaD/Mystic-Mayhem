@@ -1,6 +1,5 @@
 package Player;
 
-
 import Character.Archer.Archer;
 import Character.Healer.Healer;
 import Character.Knight.Knight;
@@ -15,11 +14,11 @@ public class Player {
     private String homeGround;
 
     //Army
-    public Archer archer;
-    public Healer healer;
-    public Knight knight;
-    public Mage mage;
-    public MythicalCreature mythicalCreature;
+    private Archer archer;
+    private Healer healer;
+    private Knight knight;
+    private Mage mage;
+    private MythicalCreature mythicalCreature;
     
     public Player(String name, String userName, String homeGround){
         this.name = name;
@@ -29,25 +28,44 @@ public class Player {
         xp = 0;
     }
 
-    public void setArcher(String name){
-        archer = new Archer(name);
-        
+    // Archer getter and setter
+    public void setArcher(Archer archer){
+        this.archer = archer;  
+    }
+    public Archer getArcher(){
+        return archer;
+    }
+    
+    // Healer getter and setter
+    public void setHealer(Healer healer){
+        this.healer = healer;
+    }
+    public Healer getHealer(){
+        return healer;
     }
 
-    public void setHealer(String name){
-        healer = new Healer(name);
+    // Knight getter and setter
+    public void setKnight(Knight knight){
+        this.knight = knight;
+    }
+    public Knight getKnight(){
+        return knight;
     }
 
-    public void setKnight(String name){
-        knight = new Knight(name);
+    // Mage getter and setter
+    public void setMage(Mage mage){
+        this.mage = mage;
+    }
+    public Mage getMage(){
+        return mage;
     }
 
-    public void setMage(String name){
-        mage = new Mage(name);
+    // MythicalCreature getter and setter
+    public void setMythicalCreature(MythicalCreature mythicalCreature){
+        this.mythicalCreature = mythicalCreature;
     }
-
-    public void setMythicalCreature(String name){
-        mythicalCreature = new MythicalCreature(name);
+    public MythicalCreature getMythicalCreature(){
+        return mythicalCreature;
     }
 
     public void setXp(short xp){

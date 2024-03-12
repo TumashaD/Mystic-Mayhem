@@ -9,6 +9,10 @@ public abstract class Character {
     protected int defense;
     protected int health;
     protected int speed;
+
+    public int getPrice(){
+        return this.price;
+    }
     
     public void attack(int damage){
         health -= 0.5*damage - 0.1*this.defense;
@@ -25,6 +29,7 @@ public abstract class Character {
         this.speed += equipment.speed;
         this.price += equipment.price*0.2;
     }
+
 
     
     public void setBattleGround(String battleGround){
