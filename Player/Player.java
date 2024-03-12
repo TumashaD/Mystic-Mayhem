@@ -5,6 +5,7 @@ import Character.Healer.Healer;
 import Character.Knight.Knight;
 import Character.Mage.Mage;
 import Character.MythicalCreature.MythicalCreature;
+import Equipment.Equipment;
 import Views.Block;
 import Views.Board;
 
@@ -25,7 +26,7 @@ public class Player {
     public Player(String name, String userName, String homeGround){
         this.name = name;
         this.userName = userName;
-        this.coins = 500;
+        this.coins = 1000;
         this.homeGround = homeGround;
         xp = 0;
     }
@@ -37,6 +38,12 @@ public class Player {
     public Archer getArcher(){
         return archer;
     }
+
+    public void buyArcher(Archer archer){
+        int sellingPrice = this.archer.getPrice()*90/100;
+        this.coins = this.coins + sellingPrice - archer.getPrice();
+        this.archer = archer;
+    }
     
     // Healer getter and setter
     public void setHealer(Healer healer){
@@ -44,6 +51,11 @@ public class Player {
     }
     public Healer getHealer(){
         return healer;
+    }
+    public void buyHealer(Healer healer){
+        int sellingPrice = this.healer.getPrice()*90/100;
+        this.coins = this.coins + sellingPrice - healer.getPrice();
+        this.healer = healer;
     }
 
     // Knight getter and setter
@@ -53,6 +65,11 @@ public class Player {
     public Knight getKnight(){
         return knight;
     }
+    public void buyKnight(Knight knight){
+        int sellingPrice = this.knight.getPrice()*90/100;
+        this.coins = this.coins + sellingPrice - knight.getPrice();
+        this.knight = knight;
+    }
 
     // Mage getter and setter
     public void setMage(Mage mage){
@@ -61,6 +78,11 @@ public class Player {
     public Mage getMage(){
         return mage;
     }
+    public void buyMage(Mage mage){
+        int sellingPrice = this.mage.getPrice()*90/100;
+        this.coins = this.coins + sellingPrice - mage.getPrice();
+        this.mage = mage;
+    }
 
     // MythicalCreature getter and setter
     public void setMythicalCreature(MythicalCreature mythicalCreature){
@@ -68,6 +90,15 @@ public class Player {
     }
     public MythicalCreature getMythicalCreature(){
         return mythicalCreature;
+    }
+    public void buyMythicalCreature(MythicalCreature mythicalCreature){
+        int sellingPrice = this.mythicalCreature.getPrice()*90/100;
+        this.coins = this.coins + sellingPrice - mythicalCreature.getPrice();
+        this.mythicalCreature = mythicalCreature;
+    }
+
+    public void buyEquipment(Equipment equipment){
+        this.coins = this.coins - equipment.getPrice();
     }
 
     
@@ -95,12 +126,15 @@ public class Player {
     public String getName(){
         return name;
     }  
+    public String getUserNmae(){
+        return userName;
+    }
     public void displayCharacters(){
         // Creating the table
         Board board = new Board(120);
 
         // Title
-        Block title = new Block(board, 105, 1, "Characters");
+        Block title = new Block(board, 105, 1, "Your Characters");
         title.setDataAlign(Block.DATA_CENTER);
         title.allowGrid(false);
         board.setInitialBlock(title);

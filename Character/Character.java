@@ -107,6 +107,14 @@ public abstract class Character {
     public int getSpeed(){
         return speed;
     }
+
+    public void setEquipment(Equipment equipment){
+        this.attack += equipment.attack;
+        this.defense += equipment.defense;
+        this.health += equipment.health;
+        this.speed += equipment.speed;
+        this.price += equipment.price*0.2;
+    }
 }
 
 

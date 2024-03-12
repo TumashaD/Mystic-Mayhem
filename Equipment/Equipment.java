@@ -7,4 +7,8 @@ public abstract class Equipment {
     public int defense = 0;
     public int health = 0;
     public int speed = 0;
+
+    public int getPrice(){
+        return price;
+    }
 }

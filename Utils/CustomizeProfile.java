@@ -1,21 +1,24 @@
 package Utils;
 
 import java.util.Scanner;
-
+import Player.Player;
 import Character.CharacterTable;
+import Character.Archer.Archer;
+import Character.Knight.Knight;
+import Character.Mage.Mage;
+import Character.Healer.Healer;
+import Character.MythicalCreature.MythicalCreature;
+import Equipment.Equipment;
 import Equipment.EquipmentTable;
+import Equipment.Armour.Armour;
+import Equipment.Artifacts.Artifact;
+import Character.Character;
 
-public class CustomizeProfile {
-    //colours
-    static final String RESET = "\u001B[0m";
-    static final String RED = "\u001B[31m";
-    static final String GREEN = "\u001B[32m";
-    static final String YELLOW = "\u001B[33m";
-    static final String BLUE = "\u001B[34m";
-    static final String ORANGE = "\u001B[38;5;208m";
-
-    public static int customizeProfileMenu(){
+public class CustomizeProfile extends Utils{
+    
+    public static Player customizeProfile(Player player){
         Scanner input = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
         String title = (BLUE +"""
             ===========================================
             |           CUSTOMIZE PROFILE             |
@@ -24,7 +27,7 @@ public class CustomizeProfile {
         String options = ( YELLOW + """
             Choose an option... 
 
-            [1] Change your name
+            [1] Your Profile
             [2] Your Characters
             [3] Main Menu
 
@@ -39,62 +42,65 @@ public class CustomizeProfile {
             choice = input.nextInt();
         }
         Utils.clearScreen();
-        return choice;
-    
+        if (choice == 1){
+            Utils.displayProfile(player);
+            System.out.print(BLUE+"Choose an option... \n[1] Change Name \n[2] Go Back\nEnter Your Choice:"+RESET);
+            int option = input.nextInt();
+            if (option == 1){
+                String changeName = ("\n"+ YELLOW + "Enter your new name: " + RESET);
+                System.out.print(changeName);
+                String newName = input2.nextLine();
+                player.setName(newName);
+                Utils.clearScreen();
+                System.out.print(GREEN+"Your name has been changed to " + newName + "\n" + RESET);
+                customizeProfile(player);
+            }
+            if (option == 2){
+                Utils.clearScreen();
+                customizeProfile(player);
+            }
+        }
+        if (choice == 2){
+            yourCharacters(player);
+        }
+        if (choice == 3){
+            Utils.mainMenu(player);
+        }
+
+        return player;
     }
-    public static void yourCharacters(){
+    public static void yourCharacters(Player player){
         Scanner input = new Scanner(System.in);
-        String title = (BLUE +"""
-            ===========================================
-            |           YOUR CHARACTERS               |
-            ===========================================
-                """ + RESET);
+        player.displayCharacters();
         String options = ( YELLOW + """
             Choose an option... 
 
             [1] Buy New Characters
             [2] Buy Equipments
-            [3] Main Menu
+            [3] Go Back
 
             Enter Your Choice: """ + RESET);
-        System.out.print(title+ options);
+        System.out.print(options);
         int choice = input.nextInt();
         while (choice < 1 || choice > 3) {
             System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
             choice = input.nextInt();
         }
         if (choice == 1){
-            buyCharacter();
+            CharacterTable.characterTable();
+            buyCharacter(player);
         }
         if (choice == 2){
-            buyEquipment();
+            chooseCharacter(player);
         }
         if (choice == 3){
             Utils.clearScreen();
-            customizeProfile();
+            customizeProfile(player);
         }
-    }
-    public static void customizeProfile(){
-        int choice = customizeProfileMenu();
-        Scanner input = new Scanner(System.in);
-        if (choice == 1){
-            String changeName = ("\n"+ YELLOW + "Enter your new name: " + RESET);
-            System.out.print(changeName);
-            String newName = input.nextLine();
-            // SetName
-            System.out.print(GREEN+"Your name has been changed to " + newName + "\n" + RESET);
-            choice = customizeProfileMenu();
-        }
-        if (choice == 2){
-            yourCharacters();
-        }
-        if (choice == 3){
-            Utils.startingScreen();
-        }
+
     }
 
-    public static void buyCharacter(){
-        CharacterTable.characterTable();
+    public static void buyCharacter(Player player){
         Scanner input = new Scanner(System.in);
         String options = ( YELLOW + """
             Choose an option... 
@@ -104,7 +110,7 @@ public class CustomizeProfile {
             [3] Buy Mage
             [4] Buy Healer
             [5] Buy Mythical Creature
-            [6] Main Menu
+            [6] Go Back
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
@@ -115,27 +121,43 @@ public class CustomizeProfile {
             choice = input.nextInt();
         }
         if (choice == 1){
-            buyArcher();
+            buyArcher(player);
+            System.out.println(GREEN+"You have successfully bought an Archer!" + RESET);
+            System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            buyCharacter(player);
         }
         if (choice == 2){
-            buyKnight();
+            buyKnight(player);
+            System.out.println(GREEN+"You have successfully bought a Knight!" + RESET);
+            System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            buyCharacter(player);
         }
         if (choice == 3){
-            buyMage();
+            buyMage(player);
+            System.out.println(GREEN+"You have successfully bought a Mage!" + RESET);
+            System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            buyCharacter(player);
         }
         if (choice == 4){
-            buyHealer();
+            buyHealer(player);
+            System.out.println(GREEN+"You have successfully bought a Healer!" + RESET);
+            System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            buyCharacter(player);
         }
         if (choice == 5){
-            buyMythicalCreature();
+            buyMythicalCreature(player);
+            System.out.println(GREEN+"You have successfully bought a Mythical Creature!" + RESET);
+            System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            buyCharacter(player);
         }
         if (choice == 6){
             Utils.clearScreen();
-            customizeProfile();
+            yourCharacters(player);
         }
+
     }
 
-    public static void buyArcher(){
+    public static void buyArcher(Player player){
         Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
@@ -144,7 +166,7 @@ public class CustomizeProfile {
             [2] Buy Ranger
             [3] Buy Sunfire
             [4] Buy Zing
-            [5] Buy Saggitarus
+            [5] Buy Saggitarius
             [6] Go Back
 
             Enter Your Choice: """ + RESET);
@@ -156,26 +178,31 @@ public class CustomizeProfile {
         }
         if (choice == 1){
             // Buy Shooter
+            player.buyArcher(new Archer("Shooter"));
         }
         if (choice == 2){
             // Buy Ranger
+            player.buyArcher(new Archer("Ranger"));
         }
         if (choice == 3){
             // Buy Sunfire
+            player.buyArcher(new Archer("Sunfire"));
         }
         if (choice == 4){
             // Buy Zing
+            player.buyArcher(new Archer("Zing"));
         }
         if (choice == 5){
             // Buy Saggitarus
+            player.buyArcher(new Archer("Saggitarius"));
         }
         if (choice == 6){
             Utils.clearScreen();
-            buyCharacter();
+            buyCharacter(player);
         }
     }
 
-    public static void buyKnight(){
+    public static void buyKnight(Player player){
         Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
@@ -196,26 +223,32 @@ public class CustomizeProfile {
         }
         if (choice == 1){
             // Buy Squire
+            player.buyKnight(new Knight("Squire"));
         }
         if (choice == 2){
             // Buy Cavalier
+            player.buyKnight(new Knight("Cavalier"));
         }
         if (choice == 3){
             // Buy Templar
+            player.buyKnight(new Knight("Templar"));
         }
         if (choice == 4){
             // Buy Zoro
+            player.buyKnight(new Knight("Zoro"));
         }
         if (choice == 5){
             // Buy Swiftblade
+            player.buyKnight(new Knight("Swiftblade"));
         }
         if (choice == 6){
-            buyCharacter();
+            Utils.clearScreen();
+            buyCharacter(player);
         }
     }
 
     // The mages are Warlock, Illusionist, Enchanter, Conjurer and Eldritch
-    public static void buyMage(){
+    public static void buyMage(Player player){
         Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
@@ -236,26 +269,32 @@ public class CustomizeProfile {
         }
         if (choice == 1){
             // Buy Warlock
+            player.buyMage(new Mage("Warlock"));
         }
         if (choice == 2){
             // Buy Illusionist
+            player.buyMage(new Mage("Illusionist"));
         }
         if (choice == 3){
             // Buy Enchanter
+            player.buyMage(new Mage("Enchanter"));
         }
         if (choice == 4){
             // Buy Conjurer
+            player.buyMage(new Mage("Conjurer"));
         }
         if (choice == 5){
             // Buy Eldritch
+            player.buyMage(new Mage("Eldritch"));
         }
         if (choice == 6){
-            buyCharacter();
+            Utils.clearScreen();
+            buyCharacter(player);
         }
     }
 
     // The healers are Soother, Medid, Alchemist, Saint and Lightbringer
-    public static void buyHealer(){
+    public static void buyHealer(Player player){
         Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
@@ -276,26 +315,33 @@ public class CustomizeProfile {
         }
         if (choice == 1){
             // Buy Soother
+            player.buyHealer(new Healer("Soother"));
         }
         if (choice == 2){
             // Buy Medid
+            player.buyHealer(new Healer("Medid"));
         }
+
         if (choice == 3){
             // Buy Alchemist
+            player.buyHealer(new Healer("Alchemist"));
         }
         if (choice == 4){
             // Buy Saint
+            player.buyHealer(new Healer("Saint"));
         }
         if (choice == 5){
             // Buy Lightbringer
+            player.buyHealer(new Healer("Lightbringer"));
         }
         if (choice == 6){
-            buyCharacter();
+            Utils.clearScreen();
+            buyCharacter(player);
         }
     }
 
     // The mythical creatures are Dragon, Basilisk, Hydra, Phoenix, and Pegasus
-    public static void buyMythicalCreature(){
+    public static void buyMythicalCreature(Player player){
         Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
@@ -316,55 +362,110 @@ public class CustomizeProfile {
         }
         if (choice == 1){
             // Buy Dragon
+            player.buyMythicalCreature(new MythicalCreature("Dragon"));
         }
         if (choice == 2){
             // Buy Basilisk
+            player.buyMythicalCreature(new MythicalCreature("Basilisk"));
         }
         if (choice == 3){
             // Buy Hydra
+            player.buyMythicalCreature(new MythicalCreature("Hydra"));
         }
         if (choice == 4){
             // Buy Phoenix
+            player.buyMythicalCreature(new MythicalCreature("Phoenix"));
         }
         if (choice == 5){
             // Buy Pegasus
+            player.buyMythicalCreature(new MythicalCreature("Pegasus"));
         }
         if (choice == 6){
-            buyCharacter();
+            Utils.clearScreen();
+            buyCharacter(player);
         }
     }
 
-    public static void buyEquipment(){
-        EquipmentTable.equipmentTable();
+    public static void chooseCharacter(Player player){
         Scanner input = new Scanner(System.in);
-        String options = ( YELLOW + """
-            Choose an option... 
+        String character = (BLUE + """
+                Choose your Character... 
 
-            [1] Buy Armour
-            [2] Buy Artifact
-            [3] Main Menu
+                [1] Archer:  """  + player.getArcher().getName() + "\n" +"""
+                [2] Knight:  """ + player.getKnight().getName()  + "\n" +"""
+                [3] Mage:  """ + player.getMage().getName() + "\n" +"""
+                [4] Healer:  """ +  player.getHealer().getName() +  "\n" +"""
+                [5] Mythical Creature:  """ +  player.getMythicalCreature().getName() + "\n"+ """
+                [6] Go Back
 
-            Enter Your Choice: """ + RESET);
-        System.out.print(options);
+                Enter Your Choice:""" + RESET);
+
+        System.out.print(character);
         int choice = input.nextInt();
-        while (choice < 1 || choice > 3) {
+
+
+        while (choice < 1 || choice > 6) {
             System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
             choice = input.nextInt();
         }
         if (choice == 1){
-            buyArmour();
+            buyEquipment(player.getArcher(), player);
         }
         if (choice == 2){
-            buyArtifact();
+            buyEquipment(player.getKnight(), player);
+        }
+        if (choice == 3){
+            buyEquipment(player.getMage(), player);
+        }
+        if (choice == 4){
+            buyEquipment(player.getHealer(), player);
+        }
+        if (choice == 5){
+            buyEquipment(player.getMythicalCreature(), player);
+        }
+        if (choice == 6){
+            Utils.clearScreen();
+            yourCharacters(player);
+        }
+    }
+
+    public static void buyEquipment(Character character, Player player){
+        EquipmentTable.equipmentTable();
+        Scanner input = new Scanner(System.in);
+        String options = ( YELLOW + """
+        Choose an option... 
+        
+        [1] Buy Armour
+        [2] Buy Artifact
+        [3] Go Back
+        
+    Enter Your Choice: """ + RESET);
+        System.out.print(options);
+        int choice = input.nextInt();
+        while (choice < 1 || choice > 5) {
+            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
+            choice = input.nextInt();
+        }
+        if (choice == 1){
+            buyArmour(character, player);
+            System.out.println(GREEN+"You have successfully bought an Armour!" + RESET);
+            System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            buyEquipment(character, player);
+        }
+        if (choice == 2){
+            buyArtifact(character, player);
+            System.out.println(GREEN+"You have successfully bought an Artifact!" + RESET);
+            System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            buyEquipment(character, player);
         }
         if (choice == 3){
             Utils.clearScreen();
-            customizeProfile();
+            yourCharacters(player);
         }
     }
 
     // The armours are Chainmail, Regalia, and Fleece
-    public static void buyArmour(){
+    public static void buyArmour(Character character, Player player){
         Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
@@ -384,21 +485,31 @@ public class CustomizeProfile {
         }
         if (choice == 1){
             // Buy Chainmail
+            Armour chainmail = new Armour("Chainmail");
+            character.setEquipment(chainmail);
+            player.buyEquipment(chainmail);
         }
         if (choice == 2){
             // Buy Regalia
+            Armour regalia = new Armour("Regalia");
+            character.setEquipment(regalia);
+            player.buyEquipment(regalia);
         }
         if (choice == 3){
             // Buy Fleece
+            Armour fleece = new Armour("Fleece");
+            character.setEquipment(fleece);
+            player.buyEquipment(fleece);
         }
         if (choice == 4){
-            buyEquipment();
+            Utils.clearScreen();
+            buyEquipment(character, player);
         }
     }
 
     // THe artifacts are Excalibur, Amulet, and Crystal
 
-    public static void buyArtifact(){
+    public static void buyArtifact(Character character, Player player){
         Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
@@ -417,15 +528,24 @@ public class CustomizeProfile {
         }
         if (choice == 1){
             // Buy Excalibur
+            Artifact excalibur = new Artifact("Excalibur");
+            character.setEquipment(excalibur);
+            player.buyEquipment(excalibur);
         }
         if (choice == 2){
             // Buy Amulet
+            Artifact amulet = new Artifact("Amulet");
+            character.setEquipment(amulet);
+            player.buyEquipment(amulet);
         }
         if (choice == 3){
             // Buy Crystal
+            Artifact crystal = new Artifact("Crystal");
+            character.setEquipment(crystal);
         }
         if (choice == 4){
-            buyEquipment();
+            Utils.clearScreen();
+            buyEquipment(character, player);
         }
     }
 }

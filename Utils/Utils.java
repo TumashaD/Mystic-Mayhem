@@ -1,18 +1,8 @@
 package Utils;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
-import Character.CharacterTable;
-import Character.Archer.Archer;
-import Character.Healer.Healer;
-import Character.Knight.Knight;
-import Character.Mage.Mage;
-import Character.MythicalCreature.MythicalCreature;
 import Player.Player;
-import Utils.CustomizeProfile;
+
 
 public class Utils {
     //colours
@@ -23,25 +13,13 @@ public class Utils {
     static final String BLUE = "\u001B[34m";
     static final String ORANGE = "\u001B[38;5;208m";
 
-    static String[] homeGrounds = {"Hillcrest", "Marshland", "Desert", "Arcane"};
-
-    static Map<String,String[]> characters = new HashMap<String,String[]>(
-        Map.of(
-            "Archer", new String[]{"Shooter", "Ranger", "Sunfire", "Zing", "Saggitarius"},
-            "Knight", new String[]{"Squire", "Cavalier", "Templar", "Zoro", "Swiftblade"},
-            "Mage", new String[]{"Warlock", "Illutionist", "Enchanter", "Conjurer", "Eldritch"},
-            "Healer", new String[]{"Soother", "Medic", "Alchemist", "Saint", "Lightbringer"},
-            "MythicalCreature", new String[]{"Dragon", "Basillisk", "Hydra", "Phoenix", "Pegasus"}
-        )
-    );
-
     public static void clearScreen() {
         System.out.print("\033[H\033[2J"); // Clear the screen
         System.out.flush();
     }
 
-    public static int mainScreen(Scanner input){
-
+    public static void mainMenu(Player player){
+        Scanner input = new Scanner(System.in);
         String initScreen = """
             ========================================================================================================================================
                         ███╗   ███╗██╗   ██╗███████╗████████╗██╗ ██████╗    ███╗   ███╗███████╗██╗   ██╗██╗  ██╗███████╗███╗   ███╗
@@ -72,114 +50,42 @@ public class Utils {
             System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
             choice = input.nextInt();
         }
-        return choice;
+        if (choice == 2) {
+            player = CreateProfile.createProfile();
+            Utils.clearScreen();
 
-    }
+            Boolean isRunOut = CreateProfile.createArmy(input,player, false);
+            Utils.clearScreen();
 
-    public static Player createProfile(Scanner input) {
+            while (isRunOut) {
+                isRunOut = CreateProfile.createArmy(input,player, true);
+                Utils.clearScreen();
+            }
+            System.out.println(GREEN + "Profile Created Successfully! \n");
+            System.out.println(YELLOW + "You have " + player.getCoins() + " coins left. \n");
+            mainMenu(player);
+        }
+
+        if (choice == 3) {
+            Utils.clearScreen();
+            CustomizeProfile.customizeProfile(player);
+        }
+        if (choice == 4){
+            System.exit(0);
+        }
+        }
+    
+    public static void displayProfile(Player player){
         System.out.println(GREEN +"""
             ===========================================
-            |           CREATE NEW PROFILE            |
+            |               YOUR PROFILE              |
             ===========================================
                 """);
-        System.out.println("Enter your name: ");
-        String name = input.nextLine();
-        
-        System.out.println("Enter your username: ");
-        String userName = input.nextLine();
-
-        
-        System.out.println("Select a home ground:");
-        System.out.println("""
-                [1] Hillcrest
-                [2] Marshland
-                [3] Desert
-                [4] Arcane
-                """);
-
-        int homeGround = input.nextInt();
-
-        while (homeGround < 1 || homeGround > 4) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            homeGround = input.nextInt();
-        }
-        
-        Player player = new Player(name, userName, homeGrounds[homeGround-1]);
-
-        return player;
-        
+        System.out.println("Name: " + player.getName());
+        System.out.println("Username: " + player.getUserNmae());
+        System.out.println("Home Ground: " + player.getHomeGround());
+        System.out.println("XP: " + player.getXp());
+        System.out.println("Coins: " + player.getCoins() + "\n");
     }
-
-    public static Boolean createArmy(Scanner input,Player player, Boolean isRunOut) {
-        int gc = player.getCoins();
-        int choice;
-        System.out.println(ORANGE +"""
-            ===========================================
-            |           CREATE NEW ARMY               |
-            ===========================================
-                """);
-        //Print Character Table
-        CharacterTable.characterTable();
-
-        if (isRunOut){
-            System.out.println(RED + """
-                ===========================================
-                |           YOU"VE RUN OUT OF COINS        |
-                ===========================================
-            """ + ORANGE);
-        }
-        System.out.println("\nYou have " + gc + " gold coins to spend. \n");
-
-        for (String key : characters.keySet()) {
-            System.out.println(ORANGE + "Select a " + key + ":");
-            String[] characterList = characters.get(key);
-            for (int i = 0; i < characterList.length; i++) {
-                System.out.println(" [" + (i+1) + "]" + characterList[i]);
-            }
-            System.out.print("Your choice: ");
-            choice = input.nextInt();
-            while (choice < 1 || choice > characterList.length) {
-                System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-                choice = input.nextInt();
-            }
-            switch (key) {
-                case "Archer":
-                    Archer archer = new Archer(characterList[choice-1]);
-                    player.setArcher(archer);
-                    gc -= archer.getPrice();
-                    break;
-                case "Knight":
-                    Knight knight = new Knight(characterList[choice-1]);
-                    player.setKnight(knight);
-                    gc -= knight.getPrice();
-                    break;
-                case "Mage":
-                    Mage mage = new Mage(characterList[choice-1]);
-                    player.setMage(mage);
-                    gc -= mage.getPrice();
-                    break;
-                case "Healer":
-                    Healer healer = new Healer(characterList[choice-1]);
-                    player.setHealer(healer);
-                    gc -= healer.getPrice();
-                    break;
-                case "MythicalCreature":
-                    MythicalCreature mythicalCreature = new MythicalCreature(characterList[choice-1]);
-                    player.setMythicalCreature(mythicalCreature);
-                    gc -= mythicalCreature.getPrice();
-                    break;
-                default:
-                    break;
-            }
-            System.out.println("\nYou have " + gc + " gold coins left.");
-            if (gc <= 0) {
-                return true;
-            }
-        }
-
-        player.setCoins(gc);
-        return false;
-
-    }
-
 }
+
