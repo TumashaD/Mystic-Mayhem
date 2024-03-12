@@ -6,8 +6,9 @@ import Character.Healer.Healer;
 import Character.Knight.Knight;
 import Character.Mage.Mage;
 import Character.MythicalCreature.MythicalCreature;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable{
     private String name;
     private String userName;
     private short xp;
@@ -74,7 +75,5 @@ public class Player {
     public String getName(){
         return name;
     }
-
-
     
 }

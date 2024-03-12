@@ -7,6 +7,9 @@ import Views.Block;
 import Views.Board;
 import Views.Table;
 
+import Player.Player;
+import Serialization.Serialization;
+
 public class Main {
     public static void main(String[] args) {
         // ANSI escape codes
@@ -31,6 +34,8 @@ public class Main {
             """;
         
         System.out.println(ORANGE + initScreen + RESET);
+
+        List<Player> players = Serialization.deserializing();
         
         String options = """
             Choose an option...
@@ -79,11 +84,9 @@ public class Main {
         // System.out.println(tableString);
 
         if (choice == 2){
-            Utils.createProfile();
+            Player player = Utils.createProfile();
+            players.add(player);
         }
-
-        
-
 
     }
 }

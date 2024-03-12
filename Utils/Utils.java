@@ -1,8 +1,12 @@
 package Utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.io.*;
 
 import Player.Player;
+import Serialization.Serialization;
 
 public class Utils {
     //colours
@@ -20,7 +24,7 @@ public class Utils {
         System.out.flush();
     }
 
-    public static void createProfile() {
+    public static Player createProfile() {
         Scanner input = new Scanner(System.in);
         System.out.println(GREEN +"""
             ===========================================
@@ -51,7 +55,9 @@ public class Utils {
         }
         
         Player player = new Player(name, userName, homeGrounds[homeGround-1]);
+        return player;
         
     }
+
     
 }
