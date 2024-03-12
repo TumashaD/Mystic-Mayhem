@@ -1,8 +1,10 @@
 package Utils;
 
 import java.util.Scanner;
-
+import Character.CharacterTable;
+import Equipment.EquipmentTable;
 import Player.Player;
+import Utils.CustomizeProfile;
 
 public class Utils {
     //colours
@@ -52,6 +54,7 @@ public class Utils {
         Player player = new Player(name, userName, homeGrounds[homeGround-1]);
         
     }
+    
 
     public static void startingScreen(){
         // ANSI escape codes
@@ -97,6 +100,12 @@ public class Utils {
         Utils.clearScreen();
         if (choice == 2){
             Utils.createProfile();
+        }
+        if (choice == 3){
+            CustomizeProfile.customizeProfile();
+        }
+        if (choice == 4){
+            System.exit(0);
         }
     }
 

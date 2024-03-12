@@ -83,6 +83,25 @@ public abstract class Character {
         }
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public int getAttack(){
+        return attack;
+    }
+
+    public int getDefense(){
+        return defense;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public int getSpeed(){
+        return speed;
+    }
 }
 
 

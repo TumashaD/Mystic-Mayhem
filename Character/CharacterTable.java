@@ -85,4 +85,5 @@ public class CharacterTable {
      
         System.out.println(board.invalidate().build().getPreview());
     }
+
 }
