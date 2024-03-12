@@ -1,5 +1,6 @@
 package Player;
 
+
 import Character.Archer.Archer;
 import Character.Healer.Healer;
 import Character.Knight.Knight;
@@ -29,24 +30,24 @@ public class Player {
     }
 
     public void setArcher(String name){
-       
+        archer = new Archer(name);
         
     }
 
     public void setHealer(String name){
-        
+        healer = new Healer(name);
     }
 
     public void setKnight(String name){
-        
+        knight = new Knight(name);
     }
 
     public void setMage(String name){
-        
+        mage = new Mage(name);
     }
 
     public void setMythicalCreature(String name){
-        
+        mythicalCreature = new MythicalCreature(name);
     }
 
     public void setXp(short xp){
