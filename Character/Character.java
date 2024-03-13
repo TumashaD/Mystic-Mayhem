@@ -9,10 +9,12 @@ public abstract class Character {
     protected int defense;
     protected int health;
     protected int speed;
+    protected int attack_priority;
+    protected int defense_priority;
+    
+    
 
-    public int getPrice(){
-        return this.price;
-    }
+
     
     public void attack(int damage){
         health -= 0.5*damage - 0.1*this.defense;
@@ -29,6 +31,8 @@ public abstract class Character {
         this.speed += equipment.speed;
         this.price += equipment.price*0.2;
     }
+
+
 
 
     
@@ -107,13 +111,30 @@ public abstract class Character {
     public int getSpeed(){
         return speed;
     }
-
+    public int getPrice(){
+        return this.price;
+    }
     public void setEquipment(Equipment equipment){
         this.attack += equipment.attack;
         this.defense += equipment.defense;
         this.health += equipment.health;
         this.speed += equipment.speed;
         this.price += equipment.price*0.2;
+    }
+    public final int getdiffence(){
+        return this.defense;
+    }
+    
+    public int getAttack_priority() {
+        return attack_priority;
+    }
+
+    public int getDefense_priority() {
+        return defense_priority;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }
 

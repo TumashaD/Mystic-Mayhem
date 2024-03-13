@@ -3,6 +3,8 @@ import Character.Character;
 
 public class MythicalCreature extends Character{
     public MythicalCreature(String name) {
+        this.attack_priority = 3;
+        this.defense_priority = 2;
        switch (name) {
         case "Dragon":
             this.name = name;
