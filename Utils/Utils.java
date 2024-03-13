@@ -3,7 +3,14 @@ package Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+import Character.Archer.Archer;
+import Character.Healer.Healer;
+import Character.Knight.Knight;
+import Character.Mage.Mage;
+import Character.MythicalCreature.MythicalCreature;
+import Equipment.Equipment;
+import Equipment.Armour.Armour;
+import Equipment.Artifacts.Artifact;
 import Player.Player;
 import Serialization.Serialization;
 
@@ -88,6 +95,28 @@ public class Utils {
         System.out.println("Home Ground: " + player.getHomeGround());
         System.out.println("XP: " + player.getXp());
         System.out.println("Coins: " + player.getCoins() + "\n");
+    }
+
+    public static Player bossOpponent(){
+        Player boss = new Player("GeraltofRivia","whitewolf","Marshland");
+        boss.setXp((short) 32);
+        boss.setCoins(215);
+        Archer ranger = new Archer("Ranger");
+        Knight squire = new Knight("Squire");
+        Mage warlock = new Mage("Warlock");
+        Healer medic = new Healer("Medic");
+        MythicalCreature dragon = new MythicalCreature("Dragon");
+        Armour chainmail = new Armour("Chainmail");
+        Artifact amulet = new Artifact("Amulet");
+        ranger.setEquipment(chainmail);
+        medic.setEquipment(amulet);
+
+        boss.setArcher(ranger);
+        boss.setKnight(squire);
+        boss.setMage(warlock);
+        boss.setHealer(medic);
+        boss.setMythicalCreature(dragon);     
+        return boss;
     }
 
     public static void saveProfile(Player player, List<Player> players){

@@ -50,7 +50,7 @@ public class CreateProfile extends Utils{
                 boolean isValidUsername = false;
 
                 while (!isValidUsername) {
-                    if (p.getUserName().equals(userName)){
+                    if (p.getUserName().equals(userName) || Utils.bossOpponent().getUserName().equals(userName)) {
                         System.out.println(RED + "Profile Already Exists!" + RESET);
                         System.out.print(YELLOW+"Enter a new username: ");
                         userName = input.nextLine();
