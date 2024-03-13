@@ -29,7 +29,7 @@ public class CustomizeProfile extends Utils{
 
             [1] Your Profile
             [2] Your Characters
-            [3] Main Menu
+            [3] Go Back
 
             Enter Your Choice: """ + RESET);
 
@@ -44,7 +44,7 @@ public class CustomizeProfile extends Utils{
         Utils.clearScreen();
         if (choice == 1){
             Utils.displayProfile(player);
-            System.out.print(BLUE+"Choose an option... \n[1] Change Name \n[2] Go Back\nEnter Your Choice:"+RESET);
+            System.out.print(BLUE+"Choose an option... \n[1] Change Name \n[2] Delete Profile \n[3] Go Back\nEnter Your Choice:"+RESET);
             int option = input.nextInt();
             if (option == 1){
                 String changeName = ("\n"+ YELLOW + "Enter your new name: " + RESET);
@@ -53,9 +53,25 @@ public class CustomizeProfile extends Utils{
                 player.setName(newName);
                 Utils.clearScreen();
                 System.out.print(GREEN+"Your name has been changed to " + newName + "\n" + RESET);
+                updateProfile(player, players);
                 customizeProfile(player);
             }
             if (option == 2){
+                Utils.clearScreen();
+                System.out.print(RED+"Are you sure you want to delete your profile? (Y/N): " + RESET);
+                String delete = input2.nextLine();
+                if (delete.equals("Y") || delete.equals("y")){
+                    Utils.clearScreen();
+                    players.remove(player);
+                    System.out.println(RED+"Profile Deleted!" + RESET);
+                    Utils.mainMenu(player);
+                }
+                else{
+                    Utils.clearScreen();
+                    customizeProfile(player);
+                }
+            }
+            if (option == 3){
                 Utils.clearScreen();
                 customizeProfile(player);
             }
@@ -64,7 +80,7 @@ public class CustomizeProfile extends Utils{
             yourCharacters(player);
         }
         if (choice == 3){
-            Utils.mainMenu(player);
+            PlayGame.profileOptions(player);
         }
 
         return player;
@@ -124,30 +140,35 @@ public class CustomizeProfile extends Utils{
             buyArcher(player);
             System.out.println(GREEN+"You have successfully bought an Archer!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            updateProfile(player, players);
             buyCharacter(player);
         }
         if (choice == 2){
             buyKnight(player);
             System.out.println(GREEN+"You have successfully bought a Knight!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            updateProfile(player, players);
             buyCharacter(player);
         }
         if (choice == 3){
             buyMage(player);
             System.out.println(GREEN+"You have successfully bought a Mage!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            updateProfile(player, players);
             buyCharacter(player);
         }
         if (choice == 4){
             buyHealer(player);
             System.out.println(GREEN+"You have successfully bought a Healer!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            updateProfile(player, players);
             buyCharacter(player);
         }
         if (choice == 5){
             buyMythicalCreature(player);
             System.out.println(GREEN+"You have successfully bought a Mythical Creature!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            updateProfile(player, players);
             buyCharacter(player);
         }
         if (choice == 6){
@@ -450,12 +471,14 @@ public class CustomizeProfile extends Utils{
             buyArmour(character, player);
             System.out.println(GREEN+"You have successfully bought an Armour!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            updateProfile(player, players);
             buyEquipment(character, player);
         }
         if (choice == 2){
             buyArtifact(character, player);
             System.out.println(GREEN+"You have successfully bought an Artifact!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
+            updateProfile(player, players);
             buyEquipment(character, player);
         }
         if (choice == 3){

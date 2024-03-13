@@ -12,7 +12,7 @@ public class Mage extends Character{
             this.price = 100;this.attack = 12;this.defense = 7;this.health = 10;this.speed = 12;
             break;
 
-        case "Sorcerer":
+        case "Illusionist":
             this.name = name;
             this.category = "Marshlander";
             this.price = 130;this.attack = 14;this.defense = 8;this.health = 11;this.speed = 13;

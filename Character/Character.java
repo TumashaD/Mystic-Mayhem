@@ -1,7 +1,9 @@
 package Character;
+import java.io.Serializable;
+
 import Equipment.Equipment;
 
-public abstract class Character {
+public abstract class Character implements Serializable{
     protected String category;
     protected String name;
     protected int price;
@@ -11,10 +13,6 @@ public abstract class Character {
     protected int speed;
     protected int attack_priority;
     protected int defense_priority;
-    
-    
-
-
     
     public void attack(int damage){
         health -= 0.5*damage - 0.1*this.defense;

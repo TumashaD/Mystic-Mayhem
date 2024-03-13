@@ -9,7 +9,6 @@ import Character.Healer.Healer;
 import Character.Knight.Knight;
 import Character.Mage.Mage;
 import Character.MythicalCreature.MythicalCreature;
-import java.util.Collections;
 import Equipment.Equipment;
 import Views.Block;
 import Views.Board;
@@ -202,7 +201,7 @@ public class Player implements Serializable{
     public String getName(){
         return name;
     }  
-    public String getUserNmae(){
+    public String getUserName(){
         return userName;
     }
     public void displayCharacters(){

@@ -1,7 +1,8 @@
 package Character.Archer;
 import Character.Character;
+import java.io.Serializable;
 
-public class Archer extends Character {
+public class Archer extends Character{
     public Archer(String name) {
         this.attack_priority = 1;
         this.defense_priority = 3;
