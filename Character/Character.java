@@ -13,17 +13,6 @@ public abstract class Character {
     protected int defense_priority;
     
     
-
-
-    
-    public void attack(int damage){
-        health -= 0.5*damage - 0.1*this.defense;
-    }
-
-    public void heal(int healing_power){
-        this.health += 0.1*healing_power;
-    }
-
     public void equipment(Equipment equipment){
         this.attack += equipment.attack;
         this.defense += equipment.defense;
@@ -33,9 +22,6 @@ public abstract class Character {
     }
 
 
-
-
-    
     public void setBattleGround(String battleGround){
         switch (battleGround) {
             case "Hillcrest":
@@ -99,13 +85,15 @@ public abstract class Character {
     public int getAttack(){
         return attack;
     }
-
     public int getDefense(){
         return defense;
     }
 
     public int getHealth(){
         return health;
+    }
+    public void setHealth(int health){
+        this.health = health;
     }
 
     public int getSpeed(){
