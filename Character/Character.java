@@ -2,9 +2,7 @@ package Character;
 import Equipment.Equipment;
 
 public abstract class Character {
-    protected enum Category {
-        Highlander, Marshlander,Sunchild,Mystic
-    }
+    protected String category;
     protected String name;
     protected int price;
     protected int attack;
@@ -13,7 +11,7 @@ public abstract class Character {
     protected int speed;
     protected int attack_priority;
     protected int defense_priority;
-    protected Category category;
+    
     
     
     public void attack(int damage){
@@ -44,50 +42,50 @@ public abstract class Character {
     public void setBattleGround(String battleGround){
         switch (battleGround) {
             case "Hillcrest":
-                    if(this.category == Category.Highlander){
+                    if(this.category == "Highlander"){
                         this.attack += 1;
                         this.defense += 1;
                         this.attack += this.attack*0.2;
                     }
-                    else if(this.category == Category.Marshlander){
+                    else if(this.category == "Marshlander"){
                         this.speed -= 1;
                     }
-                    else if(this.category == Category.Sunchild){
+                    else if(this.category == "Sunchild"){
                         this.speed -= 1;
                     }
-                    else if(this.category == Category.Mystic){
+                    else if(this.category == "Mystic"){
                         this.speed += 0.1*this.speed;
                     }
                 break;
             case "Marshland":
-                    if(this.category == Category.Marshlander){
+                    if(this.category == "Marshlander"){
                         this.defense += 2;           
                     }
-                    else if(this.category == Category.Sunchild){
+                    else if(this.category == "Sunchild"){
                         this.attack -= 1;         
                     }
-                    else if(this.category == Category.Mystic){
+                    else if(this.category == "Mystic"){
                         this.speed -= 1;
                     }
                     break;
             case "Desert":
-                if(this.category == Category.Marshlander){
+                if(this.category == "Marshlander"){
                     this.health -= 1;           
                 }
-                else if(this.category == Category.Sunchild){
+                else if(this.category == "Sunchild"){
                     this.attack += 1;         
                 }
                 break;
 
             case "Arcane":
-                if(this.category == Category.Marshlander || this.category == Category.Highlander){
+                if(this.category == "Marshlander" || this.category == "Highlander"){
                         this.defense -= 1; 
                         this.attack -= 1;          
                     }
-                    else if(this.category == Category.Sunchild){
+                    else if(this.category == "Sunchild"){
                         this.attack -= 1;         
                     }
-                    else if(this.category == Category.Mystic){
+                    else if(this.category ==" Mystic"){
                         this.attack += 2;
                     }
                 break;
@@ -125,7 +123,7 @@ public abstract class Character {
         return defense_priority;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 }
