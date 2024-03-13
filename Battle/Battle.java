@@ -5,6 +5,8 @@ import Character.Healer.Healer;
 import Player.Player;
 import Serialization.Serialization;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import Utils.Utils;
@@ -31,10 +33,8 @@ public class Battle {
 
     private static void pause(int milliseconds) {
         try {
-            // Pause for 3 seconds (3000 milliseconds)
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
-            // This part is executed if the sleep is interrupted
             System.err.println("Sleep was interrupted");
         }
     }
@@ -59,7 +59,7 @@ public class Battle {
 
         pause(500);
 
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 10; i++){
             //player1 attack
             round++;
             System.out.println();
@@ -76,10 +76,12 @@ public class Battle {
                 Character player2_Defender = player2_DefenceList.get(0);
 
                 if (player1_Attacker instanceof Healer){
-                    player1_Attacker.attack(player1_DefenceList.get(0));
+                    Character healingCharacter = Collections.min(player1_DefenceList, Comparator.comparingDouble(Character::getHealth));
+                    player1_Attacker.attack(healingCharacter);
 
-                    System.out.println(player1_Attacker.getName() + " heals " + player1_DefenceList.get(0).getName());
-                    System.out.println(player1_DefenceList.get(0).getName() + " has " + player1_DefenceList.get(0).getHealth() + " health left");
+                    System.out.println(player1_Attacker.getName() + " heals " + healingCharacter.getName());
+                    System.out.println(healingCharacter.getName() + " health has increased to " + healingCharacter.getHealth());
+                    System.out.println(Utils.YELLOW+"=============================================================");
                 }
                 else{
                     player1_Attacker.attack(player2_Defender);
@@ -100,14 +102,22 @@ public class Battle {
             } else{
                 this.originalPlayer2.setXp(this.originalPlayer2.getXp() + 1);
 
-                this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() + 0.1*this.originalPlayer1.getCoins());
-                this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() - 0.1*this.originalPlayer1.getCoins());
+                double exchange = 0.1*this.originalPlayer1.getCoins();
+                this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() + exchange);
+                this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() - exchange);
 
                 String result = String.format("""
                         =============================================================
                         %s has lost to %s   
-                        =============================================================            
-                        """, this.player1.getName(), this.player2.getName());
+                        ============================================================= 
+                        
+                        Statics:
+                        =============================================================
+                        %s : %d +1 XP || %d + %d Gold Coins
+                        -------------------------------------------------------------
+                        %s : -%d Gold Coins
+                        =============================================================
+                        """, this.player1.getName(), this.player2.getName(),player2.getName(),player2.getXp(),player2.getCoins(),(int)exchange,player2.getName(),(int)exchange);
                 return Utils.ORANGE+result+Utils.RESET;
             }
 
@@ -125,10 +135,12 @@ public class Battle {
                 Character player1_Defender = player1_DefenceList.get(0);
 
                 if (player2_Attacker instanceof Healer){
-                    player2_Attacker.attack(player2_DefenceList.get(0));
+                    Character healingCharacter = Collections.min(player2_DefenceList, Comparator.comparingDouble(Character::getHealth));
+                    player2_Attacker.attack(healingCharacter);
 
-                    System.out.println(player2_Attacker.getName() + " heals " + player2_DefenceList.get(0).getName());
-                    System.out.println(player2_DefenceList.get(0).getName() + " has " + player2_DefenceList.get(0).getHealth() + " health left");
+                    System.out.println(player2_Attacker.getName() + " heals " + healingCharacter.getName());
+                    System.out.println(healingCharacter.getName() + " health has increased to " + healingCharacter.getHealth());
+                    System.out.println(Utils.BLUE+"=============================================================");
                 }
                 else{
                     player2_Attacker.attack(player1_Defender);
@@ -150,32 +162,41 @@ public class Battle {
             else{
                 this.originalPlayer1.setXp(this.originalPlayer1.getXp() + 1);
 
-                this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() + 0.1*this.originalPlayer2.getCoins());
-                this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() - 0.1*this.originalPlayer2.getCoins());
+                double exchange = 0.1*this.originalPlayer2.getCoins();
+                this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() + exchange);
+                this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() - exchange);
 
                 String result = String.format("""
                         =============================================================
                         %s has lost to %s   
-                        =============================================================            
-                        """, this.player2.getName(), this.player2.getName());
+                        ============================================================= 
+                        
+                        Statics:
+                        =============================================================
+                        %s : %d +1 XP || %d + %d Gold Coins
+                        -------------------------------------------------------------
+                        %s : -%d Gold Coins
+                        =============================================================
+                        """, this.player2.getName(), this.player1.getName(),player1.getName(),player1.getXp(),player1.getCoins(),(int)exchange,player2.getName(),(int)exchange);
                 return Utils.ORANGE+result+Utils.RESET;
                 
             }
 
             // update index
-            if (player1_Attacker == player1_AttackList.get(player1_Index)){
-                player1_Index++;
-            }
             if (player1_Index >= player1_AttackList.size()){
                 player1_Index = 0;
             }
-
-            if (player2_AttackList.get(player2_Index) == player2_Attacker){
-                player2_Index++;
+            if (player1_Attacker == player1_AttackList.get(player1_Index) && player1_Index+1 < player1_AttackList.size()){
+                player1_Index++;
             }
+            
             if (player2_Index >= player2_AttackList.size()){
                 player2_Index = 0;
             }
+            if (player2_Attacker == player2_AttackList.get(player2_Index) && player2_Index+1 < player2_AttackList.size()){
+                player2_Index++;
+            }
+            
 
              
         
