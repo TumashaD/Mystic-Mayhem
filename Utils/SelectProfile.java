@@ -22,4 +22,26 @@ public class SelectProfile extends Utils{
         Utils.clearScreen();
         PlayGame.profileOptions(selectedPlayer);
     }
+
+    public static Player showOpponents(Player player){
+        List<Player> players = Serialization.deserializing();
+        System.out.println(GREEN+"Choose an opponent \n"+RESET);
+        for (int i = 0; i < players.size(); i++) {
+            if (!players.get(i).getName().equals(player.getName())) {
+                System.out.println(YELLOW+"[" + (i + 1) + "] " + players.get(i).getName() + " : " + "XP = " + players.get(i).getXp()) ;
+            }
+        }
+        System.out.print("\nEnter your choice: ");
+        Scanner input = new Scanner(System.in);
+        int choice = input.nextInt();
+        while (choice < 1 || choice > players.size()) {
+            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
+            choice = input.nextInt();
+        }
+        Player selectedOpponent = players.get(choice - 1);
+        Utils.clearScreen();
+        return selectedOpponent;
+    }
+
 }
+

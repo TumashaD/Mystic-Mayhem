@@ -115,5 +115,21 @@ public class Utils {
             }
         }
     }
+
+    public static void deleteProfile(Player player, List<Player> players){
+        for (int i = 0; i < players.size(); i++){
+            if (players.get(i).getUserName().equals(player.getUserName())){
+                players.remove(i);
+                boolean creation = Serialization.serializing(players);
+                if (creation){
+                    System.out.println(GREEN + "Profile Deleted Successfully!" + RESET);
+                }
+                else{
+                    System.out.println(RED + "Profile Delete Failed!" + RESET);
+                }
+            }
+        }
+    }
+
 }
 

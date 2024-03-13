@@ -13,6 +13,8 @@ import Equipment.EquipmentTable;
 import Equipment.Armour.Armour;
 import Equipment.Artifacts.Artifact;
 import Character.Character;
+import java.util.List;
+import Serialization.Serialization;
 
 public class CustomizeProfile extends Utils{
     
@@ -58,15 +60,12 @@ public class CustomizeProfile extends Utils{
             }
             if (option == 2){
                 Utils.clearScreen();
-                System.out.print(RED+"Are you sure you want to delete your profile? (Y/N): " + RESET);
+                System.out.print(RED+"Are you sure you want to delete your profile? (Y/N): "+RESET);
                 String delete = input2.nextLine();
                 if (delete.equals("Y") || delete.equals("y")){
-                    Utils.clearScreen();
-                    players.remove(player);
-                    System.out.println(RED+"Profile Deleted!" + RESET);
+                    deleteProfile(player, players);
                     Utils.mainMenu(player);
-                }
-                else{
+                } else {
                     Utils.clearScreen();
                     customizeProfile(player);
                 }
@@ -141,6 +140,8 @@ public class CustomizeProfile extends Utils{
             System.out.println(GREEN+"You have successfully bought an Archer!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
             updateProfile(player, players);
+            Utils.clearScreen();
+            CharacterTable.characterTable();
             buyCharacter(player);
         }
         if (choice == 2){
@@ -148,6 +149,8 @@ public class CustomizeProfile extends Utils{
             System.out.println(GREEN+"You have successfully bought a Knight!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
             updateProfile(player, players);
+            Utils.clearScreen();
+            CharacterTable.characterTable();
             buyCharacter(player);
         }
         if (choice == 3){
@@ -155,6 +158,8 @@ public class CustomizeProfile extends Utils{
             System.out.println(GREEN+"You have successfully bought a Mage!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
             updateProfile(player, players);
+            Utils.clearScreen();
+            CharacterTable.characterTable();
             buyCharacter(player);
         }
         if (choice == 4){
@@ -162,6 +167,8 @@ public class CustomizeProfile extends Utils{
             System.out.println(GREEN+"You have successfully bought a Healer!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
             updateProfile(player, players);
+            Utils.clearScreen();
+            CharacterTable.characterTable();
             buyCharacter(player);
         }
         if (choice == 5){
@@ -169,6 +176,8 @@ public class CustomizeProfile extends Utils{
             System.out.println(GREEN+"You have successfully bought a Mythical Creature!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
             updateProfile(player, players);
+            Utils.clearScreen();
+            CharacterTable.characterTable();
             buyCharacter(player);
         }
         if (choice == 6){
@@ -472,6 +481,8 @@ public class CustomizeProfile extends Utils{
             System.out.println(GREEN+"You have successfully bought an Armour!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
             updateProfile(player, players);
+            Utils.clearScreen();
+            EquipmentTable.equipmentTable();
             buyEquipment(character, player);
         }
         if (choice == 2){
@@ -479,6 +490,8 @@ public class CustomizeProfile extends Utils{
             System.out.println(GREEN+"You have successfully bought an Artifact!" + RESET);
             System.out.println(YELLOW+"You have " + player.getCoins() + " coins left" + RESET);
             updateProfile(player, players);
+            Utils.clearScreen();
+            EquipmentTable.equipmentTable();
             buyEquipment(character, player);
         }
         if (choice == 3){
