@@ -13,7 +13,7 @@ public abstract class Character implements Serializable{
     protected int speed;
     protected int attack_priority;
     protected int defense_priority;
-    protected int bonus_turn = 0;
+    protected double bonus_turn;
     
     
     public void equipment(Equipment equipment){
@@ -31,7 +31,7 @@ public abstract class Character implements Serializable{
                     if(this.category == "Highlander"){
                         this.attack += 1;
                         this.defense += 1;
-                        this.attack += this.attack*0.2;
+                        this.bonus_turn = 0.2;
                     }
                     else if(this.category == "Marshlander"){
                         this.speed -= 1;
@@ -70,6 +70,9 @@ public abstract class Character implements Serializable{
                     }
                     else if(this.category == "Sunchild"){
                         this.attack -= 1;         
+                    }
+                    else if(this.category == "Mystic"){
+                        this.bonus_turn = 0.1;
                     }
                     
                 break;
