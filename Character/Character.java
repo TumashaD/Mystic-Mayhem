@@ -11,7 +11,10 @@ public abstract class Character {
     protected int defense;
     protected int health;
     protected int speed;
+    protected int attack_priority;
+    protected int defense_priority;
     protected Category category;
+    
     
     public void attack(int damage){
         health -= 0.5*damage - 0.1*this.defense;
@@ -28,6 +31,14 @@ public abstract class Character {
         this.speed += equipment.speed;
         this.price += equipment.price*0.2;
     }
+    public final int getSpeed(){
+        return this.speed;
+    }
+
+    public final int getdiffence(){
+        return this.defense;
+    }
+    
 
     
     public void setBattleGround(String battleGround){
@@ -84,6 +95,38 @@ public abstract class Character {
             default:
                 break;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getAttack_priority() {
+        return attack_priority;
+    }
+
+    public int getDefense_priority() {
+        return defense_priority;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 }
 

@@ -3,6 +3,8 @@ import Character.Character;
 
 public class Mage extends Character{
     public Mage(String name) {
+        this.attack_priority = 4;
+        this.defense_priority = 5;
       switch (name) {
         case "Warlock":
             this.name = name;

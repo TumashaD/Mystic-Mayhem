@@ -3,6 +3,8 @@ import Character.Character;
 
 public class Healer extends Character {
     public Healer(String name) {
+        this.attack_priority = 5;
+        this.defense_priority = 1;
         switch (name) {
             case "Shooter":
                 this.name = name;

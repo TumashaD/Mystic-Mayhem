@@ -3,6 +3,8 @@ import Character.Character;
 
 public class Knight extends Character {
     public Knight(String name) {
+        this.attack_priority = 2;
+        this.defense_priority = 4;
         switch (name) {
             case "Squire":
                 this.name = name;
