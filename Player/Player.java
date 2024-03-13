@@ -18,8 +18,8 @@ import java.io.Serializable;
 public class Player implements Serializable{
     private String name;
     private String userName;
-    private short xp;
-    private int coins;
+    private int xp;
+    private double coins;
     private String homeGround;
 
     //Army
@@ -28,16 +28,13 @@ public class Player implements Serializable{
     private Knight knight;
     private Mage mage;
     private MythicalCreature mythicalCreature;
-
-    // public List<Character> attackPriority;
-    // public List<Character> defencePriority;
     
     public Player(String name, String userName, String homeGround){
         this.name = name;
         this.userName = userName;
-        this.coins = 1000;
+        this.coins = 500;
         this.homeGround = homeGround;
-        xp = 0;
+        this.xp = 0;
     }
 
     // Archer getter and setter
@@ -110,55 +107,34 @@ public class Player implements Serializable{
         this.coins = this.coins - equipment.getPrice();
     }
 
-    public void setXp(short xp){
+    public void setXp(int xp){
         this.xp = xp;
     }
-    public short getXp(){
-        return xp;
+    public int getXp(){
+        return this.xp;
     }
-    public void setCoins(int coins){
-        this.coins = coins;
+
+    public void setCoins(double coins){
+        this.coins = Math.round(coins * 10) / 10.0;
     }
-    public int getCoins(){
+    public double getCoins(){
         return coins;
     }
-    public void setHomeGround(String homeGround){
-        this.homeGround = homeGround;
-    }
+
     public String getHomeGround(){
         return homeGround;
     }
+
     public void setName(String name){
         this.name = name;
     }
     public String getName(){
         return name;
     }  
+
     public String getUserName(){
         return userName;
     }
-
-    // private void updateArmy(){
-    //     this.attackPriority.addAll(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
-    //     this.attackPriority.sort((c1, c2) -> {
-    //         int speedCompare = Integer.compare(c2.getSpeed(), c1.getSpeed());
-    //         if (speedCompare == 0) {
-    //             // If speeds are equal, compare by type
-    //             return Integer.compare(c1.getAttack_priority(), c2.getAttack_priority());
-    //         }
-    //         return speedCompare;
-    //     });
-
-    //     this.defencePriority.addAll(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
-    //     this.defencePriority.sort((c1, c2) -> {
-    //         int defenceCompare = Integer.compare(c1.getdiffence(), c2.getdiffence());
-    //         if (defenceCompare == 0) {
-    //             // If defences are equal, compare by type
-    //             return Integer.compare(c1.getDefense_priority(), c2.getDefense_priority());
-    //         }
-    //         return defenceCompare;
-    //     });
-    // }
 
     public List<Character> getAttackers(){
         List<Character> attackPriority = new ArrayList<>(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
@@ -186,6 +162,14 @@ public class Player implements Serializable{
                     return defenceCompare;
                 });
         return defencePriority;
+    }
+
+    public void setBattleGround(String battleGround){
+        this.archer.setBattleGround(battleGround);
+        this.healer.setBattleGround(battleGround);
+        this.knight.setBattleGround(battleGround);
+        this.mage.setBattleGround(battleGround);
+        this.mythicalCreature.setBattleGround(battleGround);
     }
 
 

@@ -9,7 +9,7 @@ public abstract class Character implements Serializable{
     protected int price;
     protected int attack;
     protected int defense;
-    protected int health;
+    protected double health;
     protected int speed;
     protected int attack_priority;
     protected int defense_priority;
@@ -91,10 +91,10 @@ public abstract class Character implements Serializable{
         return defense;
     }
 
-    public int getHealth(){
+    public double getHealth(){
         return health;
     }
-    public void setHealth(int health){
+    public void setHealth(double health){
         this.health = health;
     }
 

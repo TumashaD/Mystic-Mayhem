@@ -1,5 +1,4 @@
 
-import Utils.Utils;
 import Battle.Battle;
 import Character.Archer.Archer;
 import Character.Knight.Knight;
@@ -33,6 +32,7 @@ public class Main {
 
         Battle battle = new Battle(player1, player2);
         System.out.println(battle.startBattle());
+        
 
     }
 }

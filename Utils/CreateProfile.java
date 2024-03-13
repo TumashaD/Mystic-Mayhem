@@ -85,7 +85,7 @@ public class CreateProfile extends Utils{
 
     public static Boolean createArmy(Player player, Boolean isRunOut) {
         Scanner input = new Scanner(System.in);
-        int gc = player.getCoins();
+        double gc = player.getCoins();
         int choice;
         System.out.println(ORANGE +"""                            
                                             ===========================================
