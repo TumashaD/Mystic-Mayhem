@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import Player.Player;
 import Serialization.Serialization;
+import Battle.Battle;
 
 public class PlayGame extends Utils{
     public static void playGame(Player player){
@@ -55,7 +56,10 @@ public class PlayGame extends Utils{
         }
 
         if (choice == 1) {
-            
+            Utils.clearScreen();
+            Player oppponent = SelectProfile.showOpponents(player);
+            Battle battle = new Battle(player, oppponent);
+            System.out.println(battle.startBattle());
         }
 
         if (choice == 2){
