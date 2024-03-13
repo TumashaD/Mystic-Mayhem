@@ -16,18 +16,19 @@ import Serialization.Serialization;
 
 public class Utils {
     //colours
-    static final String RESET = "\u001B[0m";
-    static final String RED = "\u001B[31m";
-    static final String GREEN = "\u001B[32m";
-    static final String YELLOW = "\u001B[33m";
-    static final String BLUE = "\u001B[34m";
-    static final String ORANGE = "\u001B[38;5;208m";
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[38;5;81m";
+    public static final String ORANGE = "\u001B[38;5;208m";
     static final List<Player> players = Serialization.deserializing();
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J"); // Clear the screen
         System.out.flush();
     }
+    
 
     static final String initScreen = """
         ========================================================================================================================================
