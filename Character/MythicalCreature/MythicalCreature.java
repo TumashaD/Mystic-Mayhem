@@ -41,6 +41,7 @@ public class MythicalCreature extends Character{
        }
     }
 
+    @Override
     public void attack(Character character){
         double damage = 0.5*this.attack - 0.1*character.getDefense();
         character.setHealth((int)(character.getHealth() - damage));

@@ -37,11 +37,13 @@ public class Healer extends Character {
                 break;
         }
     }
-
-    public void heal(Character character){
+    
+    @Override
+    public void attack(Character character){
         double heal = 0.5*this.attack;
         character.setHealth((int)(character.getHealth() + heal));
     }
+    
 
     
 }

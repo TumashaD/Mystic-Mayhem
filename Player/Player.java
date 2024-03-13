@@ -30,8 +30,8 @@ public class Player implements Serializable{
     private Mage mage;
     private MythicalCreature mythicalCreature;
 
-    private List<Character> attackPriority = new ArrayList<>(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
-    private List<Character> defencePriority = new ArrayList<>(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
+    // public List<Character> attackPriority;
+    // public List<Character> defencePriority;
     
     public Player(String name, String userName, String homeGround){
         this.name = name;
@@ -139,8 +139,32 @@ public class Player implements Serializable{
         return userName;
     }
 
-    private void updateArmy(){
-        this.attackPriority.sort((c1, c2) -> {
+    // private void updateArmy(){
+    //     this.attackPriority.addAll(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
+    //     this.attackPriority.sort((c1, c2) -> {
+    //         int speedCompare = Integer.compare(c2.getSpeed(), c1.getSpeed());
+    //         if (speedCompare == 0) {
+    //             // If speeds are equal, compare by type
+    //             return Integer.compare(c1.getAttack_priority(), c2.getAttack_priority());
+    //         }
+    //         return speedCompare;
+    //     });
+
+    //     this.defencePriority.addAll(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
+    //     this.defencePriority.sort((c1, c2) -> {
+    //         int defenceCompare = Integer.compare(c1.getdiffence(), c2.getdiffence());
+    //         if (defenceCompare == 0) {
+    //             // If defences are equal, compare by type
+    //             return Integer.compare(c1.getDefense_priority(), c2.getDefense_priority());
+    //         }
+    //         return defenceCompare;
+    //     });
+    // }
+
+    public List<Character> getAttackers(){
+        List<Character> attackPriority = new ArrayList<>(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
+
+        attackPriority.sort((c1, c2) -> {
             int speedCompare = Integer.compare(c2.getSpeed(), c1.getSpeed());
             if (speedCompare == 0) {
                 // If speeds are equal, compare by type
@@ -149,23 +173,20 @@ public class Player implements Serializable{
             return speedCompare;
         });
 
-        this.defencePriority.sort((c1, c2) -> {
-            int defenceCompare = Integer.compare(c1.getdiffence(), c2.getdiffence());
-            if (defenceCompare == 0) {
-                // If defences are equal, compare by type
-                return Integer.compare(c1.getDefense_priority(), c2.getDefense_priority());
-            }
-            return defenceCompare;
-        });
-    }
-
-    public List<Character> getAttackers(){
-        updateArmy();
-        return this.attackPriority;
+        return attackPriority;
     }
     public List<Character> getDefenders(){
-        updateArmy();
-        return this.defencePriority;
+        List<Character> defencePriority = new ArrayList<>(Arrays.asList(this.archer, this.healer, this.knight, this.mage, this.mythicalCreature));
+
+        defencePriority.sort((c1, c2) -> {
+                    int defenceCompare = Integer.compare(c1.getdiffence(), c2.getdiffence());
+                    if (defenceCompare == 0) {
+                        // If defences are equal, compare by type
+                        return Integer.compare(c1.getDefense_priority(), c2.getDefense_priority());
+                    }
+                    return defenceCompare;
+                });
+        return defencePriority;
     }
 
 

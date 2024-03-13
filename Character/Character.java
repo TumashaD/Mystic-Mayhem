@@ -124,6 +124,8 @@ public abstract class Character {
     public String getCategory() {
         return category;
     }
+
+    public void attack(Character character){}
 }
 
 
