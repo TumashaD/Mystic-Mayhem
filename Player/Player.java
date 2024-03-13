@@ -13,8 +13,9 @@ import java.util.Collections;
 import Equipment.Equipment;
 import Views.Block;
 import Views.Board;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable{
     private String name;
     private String userName;
     private short xp;
