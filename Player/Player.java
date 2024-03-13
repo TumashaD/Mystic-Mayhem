@@ -19,7 +19,7 @@ public class Player implements Serializable{
     private String name;
     private String userName;
     private int xp;
-    private double coins;
+    private int coins;
     private String homeGround;
 
     //Army
@@ -32,9 +32,9 @@ public class Player implements Serializable{
     public Player(String name, String userName, String homeGround){
         this.name = name;
         this.userName = userName;
-        this.coins = 500;
+        this.coins = 5000;
         this.homeGround = homeGround;
-        this.xp = 0;
+        this.xp = 1;
     }
 
     // Archer getter and setter
@@ -115,9 +115,9 @@ public class Player implements Serializable{
     }
 
     public void setCoins(double coins){
-        this.coins = Math.round(coins * 10) / 10.0;
+        this.coins = (int) Math.round(coins);
     }
-    public double getCoins(){
+    public int getCoins(){
         return coins;
     }
 
@@ -215,6 +215,5 @@ public class Player implements Serializable{
 
         System.out.println(board.invalidate().build().getPreview());        
     }
-    
     
 }
