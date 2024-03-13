@@ -82,7 +82,7 @@ public class Utils {
             ===========================================
                 """);
         System.out.println("Name: " + player.getName());
-        System.out.println("Username: " + player.getUserNmae());
+        System.out.println("Username: " + player.getUserName());
         System.out.println("Home Ground: " + player.getHomeGround());
         System.out.println("XP: " + player.getXp());
         System.out.println("Coins: " + player.getCoins() + "\n");

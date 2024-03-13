@@ -201,7 +201,7 @@ public class Player {
     public String getName(){
         return name;
     }  
-    public String getUserNmae(){
+    public String getUserName(){
         return userName;
     }
     public void displayCharacters(){
