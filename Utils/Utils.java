@@ -2,6 +2,7 @@ package Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import Character.Archer.Archer;
@@ -23,7 +24,7 @@ public class Utils {
     public static final String YELLOW = "\u001B[33m";
     public static final String BLUE = "\u001B[38;5;81m";
     public static final String ORANGE = "\u001B[38;5;208m";
-    static final List<Player> players = Serialization.deserializing();
+    public static final List<Player> players = Serialization.deserializing();
 
     public static void clearScreen() {
         try {
@@ -80,14 +81,9 @@ public class Utils {
         Enter Your Choice: """;
 
     public static void mainMenu(Player player){
-        Scanner input = new Scanner(System.in);      
         System.out.println(ORANGE + initScreen + RESET);
         System.out.print(YELLOW + options + RESET);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 4) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
+        int choice = getChoice(2);
         if (choice == 1) {
             Utils.clearScreen();
             PlayGame.playGame(player);
@@ -129,8 +125,14 @@ public class Utils {
         boss.setKnight(squire);
         boss.setMage(warlock);
         boss.setHealer(medic);
-        boss.setMythicalCreature(dragon);     
+        boss.setMythicalCreature(dragon);  
         return boss;
+    }
+
+    public static List<Player> playersWithBoss(){
+        List<Player> playersCopy = new ArrayList<>(players);
+        playersCopy.add(bossOpponent());
+        return playersCopy;
     }
 
     public static void saveProfile(Player player, List<Player> players){
@@ -173,5 +175,22 @@ public class Utils {
         }
     }
 
+
+    public static int getChoice(int n) {
+        Scanner input = new Scanner(System.in);
+        int choice;
+        try {
+            choice = input.nextInt();
+            while (choice < 1 || choice > n) {
+                System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
+                choice = input.nextInt();
+            }
+        } catch (InputMismatchException e) {
+            System.out.print(RED + "Invalid Input! Please enter a valid integer choice: " + RESET);
+            input.nextLine();
+            choice = getChoice(n); 
+        }
+        return choice;
+    }
 }
 

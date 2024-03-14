@@ -3,9 +3,10 @@ package Utils;
 import Player.Player;
 import Serialization.Serialization;
 import java.util.List;
-import java.util.Scanner;
 
 public class SelectProfile extends Utils{
+    public static List<Player> playersCopy = playersWithBoss();
+
     public static void showProfiles(){
         List<Player> players = Serialization.deserializing();
         System.out.println(GREEN+"\nPlayers \n"+RESET);
@@ -20,44 +21,53 @@ public class SelectProfile extends Utils{
         }
         else{
             System.out.print("\nChoose a profile: ");
-            Scanner input = new Scanner(System.in);
-            int choice = input.nextInt();
-            while (choice < 1 || choice > players.size()) {
-                System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-                choice = input.nextInt();
-            }
+            int choice = getChoice(players.size());
             Player selectedPlayer = players.get(choice - 1);
             Utils.clearScreen();
             PlayGame.profileOptions(selectedPlayer);
         }
     }
+    public static int GenerateRandomIndex(List<Player> players){
+        int randomIndex = (int) (Math.random() * players.size());
+        return randomIndex;
+    }
 
     public static Player showOpponents(Player player){
-        List<Player> players = Serialization.deserializing();
-        System.out.println(GREEN+"Choose an opponent \n"+RESET);
-        for (int i = 0; i < players.size(); i++) {
-            if (!players.get(i).getName().equals(player.getName())) {
-                System.out.println(YELLOW+"[" + (i + 1) + "] " + players.get(i).getName() + " : " + "XP = " + players.get(i).getXp()) ;
-            }
+        System.out.println(YELLOW+"Your Opponent \n"+RESET);
+        int randomIndex = GenerateRandomIndex(playersCopy);
+        while (playersCopy.get(randomIndex).getName().equals(player.getName())) {
+            randomIndex = GenerateRandomIndex(playersCopy);
         }
-        System.out.println(YELLOW + "[" + (players.size()+1) + "] " + Utils.bossOpponent().getName() +" : " + "XP = " + Utils.bossOpponent().getXp()+ RESET);
+        Player opponent = playersCopy.get(randomIndex);
+        System.out.println(RED + opponent.getName() + " (" + "XP: " + opponent.getXp() + ")" + RESET);
+        System.out.println("\nArcher: " + opponent.getArcher().getName() +
+                           "\nKnight: " + opponent.getKnight().getName() +
+                           "\nMage: " + opponent.getMage().getName() +
+                           "\nHealer: " + opponent.getHealer().getName() +
+                           "\nMythical Creature: " + opponent.getMythicalCreature().getName());
+        System.out.println(YELLOW+"\n [ 1 ] Battle Opponent " + "\n [ 2 ] Skip Opponent " + "\n [ 3 ] Exit ");
         System.out.print("\nEnter your choice: ");
-        Scanner input = new Scanner(System.in);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > players.size()+1) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
+        int choice = getChoice(3);
+        if (choice == 2){
+            Utils.clearScreen();
+            playersCopy.remove(opponent);
+            if (playersCopy.size() == 1){
+                playersCopy = playersWithBoss();
+            }
+            opponent = showOpponents(player);  
         }
-        Player selectedOpponent;
-        if (choice == players.size()+1){
-            selectedOpponent = Utils.bossOpponent();
+        else if (choice == 1){
+            Utils.clearScreen();
+            return opponent;
         }
-        else{
-            selectedOpponent = players.get(choice - 1);
+        else if (choice == 3){
+            Utils.clearScreen();
+            PlayGame.profileOptions(player);
         }
-        Utils.clearScreen();
-        return selectedOpponent;
+        return opponent;
     }
 
 }
+
+
 

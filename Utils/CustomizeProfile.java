@@ -19,7 +19,6 @@ import Serialization.Serialization;
 public class CustomizeProfile extends Utils{
     
     public static Player customizeProfile(Player player){
-        Scanner input = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         String title = (BLUE +"""
             ===========================================
@@ -37,17 +36,12 @@ public class CustomizeProfile extends Utils{
 
         System.out.print(title+ options);
 
-        int choice = input.nextInt();
-        
-        while (choice < 1 || choice > 3) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
+        int choice = getChoice(3);
         Utils.clearScreen();
         if (choice == 1){
             Utils.displayProfile(player);
             System.out.print(BLUE+"Choose an option... \n[1] Change Name \n[2] Delete Profile \n[3] Go Back\nEnter Your Choice:"+RESET);
-            int option = input.nextInt();
+            int option = getChoice(3);
             if (option == 1){
                 String changeName = ("\n"+ YELLOW + "Enter your new name: " + RESET);
                 System.out.print(changeName);
@@ -85,7 +79,6 @@ public class CustomizeProfile extends Utils{
         return player;
     }
     public static void yourCharacters(Player player){
-        Scanner input = new Scanner(System.in);
         player.displayCharacters();
         String options = ( YELLOW + """
             Choose an option... 
@@ -96,11 +89,7 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 3) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
+        int choice = getChoice(3);
         if (choice == 1){
             CharacterTable.characterTable();
             buyCharacter(player);
@@ -119,7 +108,6 @@ public class CustomizeProfile extends Utils{
 
     public static void buyCharacter(Player player){
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( YELLOW + """
             Choose an option... 
 
@@ -132,12 +120,8 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
+        int choice = getChoice(6);
         System.out.println();
-        while (choice < 1 || choice > 6) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
         CharacterTable.characterTable();
         if (choice == 1){
             while(isBought == false){
@@ -267,7 +251,6 @@ public class CustomizeProfile extends Utils{
             n = 0;
         }
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = (ORANGE + """
             Choose an option... 
 
@@ -280,15 +263,12 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 6 || choice == n) {
+        int choice = getChoice(6);
+        while (choice == n){
             if (choice == n) {
                 System.out.print(RED + "You already have this Archer! Please enter a valid choice: " + RESET);
             }
-            else {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            }
-            choice = input.nextInt();
+            choice = getChoice(6);
         }
         if (choice == 1) {
             // Buy Shooter
@@ -335,7 +315,6 @@ public class CustomizeProfile extends Utils{
             n = 0;
         }
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
 
@@ -348,15 +327,12 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 6 || choice == n) {
+        int choice = getChoice(n);
+        while (choice == n){
             if (choice == n) {
                 System.out.print(RED + "You already have this Knight! Please enter a valid choice: " + RESET);
             }
-            else {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            }
-            choice = input.nextInt();
+            choice = getChoice(6);
         }
         if (choice == 1 && !player.getKnight().getName().equals("Squire")) {
             // Buy Squire
@@ -408,7 +384,6 @@ public class CustomizeProfile extends Utils{
             n = 0;
         }
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
 
@@ -421,15 +396,12 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 6 || choice == n) {
+        int choice = getChoice(6);
+        while (choice == n){
             if (choice == n) {
                 System.out.print(RED + "You already have this Mage! Please enter a valid choice: " + RESET);
             }
-            else {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            }
-            choice = input.nextInt();
+            choice = getChoice(6);
         }
         if (choice == 1){
             // Buy Warlock
@@ -481,7 +453,6 @@ public class CustomizeProfile extends Utils{
             n = 0;
         }
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
 
@@ -494,16 +465,15 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 6 || choice == n) {
+        int choice = getChoice(6);
+
+        while (choice == n){
             if (choice == n) {
                 System.out.print(RED + "You already have this Healer! Please enter a valid choice: " + RESET);
             }
-            else {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            }
-            choice = input.nextInt();
+            choice = getChoice(6);
         }
+
         if (choice == 1){
             // Buy Soother
             isBought = player.buyHealer(new Healer("Soother"));
@@ -555,7 +525,6 @@ public class CustomizeProfile extends Utils{
             n = 0;
         }
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
 
@@ -568,15 +537,12 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 6 || choice == n) {
+        int choice = getChoice(6);
+        while (choice == n){
             if (choice == n) {
                 System.out.print(RED + "You already have this Mythical Creature! Please enter a valid choice: " + RESET);
             }
-            else {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            }
-            choice = input.nextInt();
+            choice = getChoice(6);
         }
         if (choice == 1){
             // Buy Dragon
@@ -607,7 +573,6 @@ public class CustomizeProfile extends Utils{
     }
 
     public static void chooseCharacter(Player player){
-        Scanner input = new Scanner(System.in);
         String character = (BLUE + """
                 Choose your Character... 
 
@@ -621,12 +586,7 @@ public class CustomizeProfile extends Utils{
                 Enter Your Choice:""" + RESET);
 
         System.out.print(character);
-        int choice = input.nextInt();
-
-        while (choice < 1 || choice > 6) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
+        int choice = getChoice(6);
         if (choice == 1){
             EquipmentTable.equipmentTable();
             buyEquipment(player.getArcher(), player);
@@ -655,7 +615,6 @@ public class CustomizeProfile extends Utils{
 
     public static void buyEquipment(Character character, Player player){
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( YELLOW + """
     Choose an option... 
         
@@ -666,11 +625,7 @@ public class CustomizeProfile extends Utils{
     Enter Your Choice: """ + RESET);
         System.out.print("Character: " + character.getName() + "\n");
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 5) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
+        int choice = getChoice(3);
         if (choice == 1){
             Utils.clearScreen();
             EquipmentTable.equipmentTable();
@@ -737,7 +692,6 @@ public class CustomizeProfile extends Utils{
             n = 0;
         }
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
 
@@ -748,16 +702,14 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
+        int choice = getChoice(4);
         System.out.println();
-        while (choice < 1 || choice > 4 || choice == n) {
+        
+        while (choice == n){
             if (choice == n) {
                 System.out.print(RED + "You already have this Armour! Please enter a valid choice: " + RESET);
             }
-            else {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            }
-            choice = input.nextInt();
+            choice = getChoice(6);
         }
         if (choice == 1){
             // Buy Chainmail
@@ -808,7 +760,6 @@ public class CustomizeProfile extends Utils{
             n = 0;
         }
         boolean isBought = false;
-        Scanner input = new Scanner(System.in);
         String options = ( ORANGE + """
             Choose an option... 
 
@@ -819,15 +770,12 @@ public class CustomizeProfile extends Utils{
 
             Enter Your Choice: """ + RESET);
         System.out.print(options);
-        int choice = input.nextInt();
-        while (choice < 1 || choice > 4 || choice == n) {
+        int choice = getChoice(4);
+        while (choice == n){
             if (choice == n) {
                 System.out.print(RED + "You already have this Artifact! Please enter a valid choice: " + RESET);
             }
-            else {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            }
-            choice = input.nextInt();
+            choice = getChoice(6);
         }
         if (choice == 1){
             // Buy Excalibur
