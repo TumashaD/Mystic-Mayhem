@@ -77,14 +77,14 @@ public class Battle {
 
                 if (player1_Attacker instanceof Healer){
                     Character healingCharacter = Collections.min(player1_DefenceList, Comparator.comparingDouble(Character::getHealth));
-                    player1_Attacker.attack(healingCharacter);
+                    player1_Attacker.attack(healingCharacter, 1);
 
                     System.out.println(player1_Attacker.getName() + " heals " + healingCharacter.getName());
                     System.out.println(healingCharacter.getName() + " health has increased to " + healingCharacter.getHealth());
                     System.out.println(Utils.YELLOW+"=============================================================");
                 }
                 else{
-                    player1_Attacker.attack(player2_Defender);
+                    player1_Attacker.attack(player2_Defender, 1);
 
                     System.out.println(player1_Attacker.getName() + " attacks " + player2_Defender.getName());
 
@@ -99,6 +99,47 @@ public class Battle {
                         System.out.println(Utils.YELLOW+"=============================================================");
                     }
                 }
+                //bonus attack
+                if(player1_Attacker.getbonus_attack() > 0){
+
+                    System.out.printf(Utils.YELLOW+"""
+                        =============================================================
+                        Round %d ----> Player %s is playing Bonus attack   
+                            """, round, this.player1.getName());
+                    System.out.println("-------------------------------------------------------------");
+                    player1_Attacker.attack(player2_Defender, 1);
+
+                    System.out.println(player1_Attacker.getName() + " attacks " + player2_Defender.getName());
+
+                    if (player2_Defender.getHealth() <= 0){
+                        player2_DefenceList.remove(player2_Defender);
+                        player2_AttackList.remove(player2_Defender);
+                        System.out.println(Utils.RED + player2_Defender.getName() + " is eliminated");
+                        System.out.println(Utils.YELLOW+"=============================================================");
+                    }
+                    else{
+                        System.out.println(player2_Defender.getName() + " has " + player2_Defender.getHealth() + " health left");
+                        System.out.println(Utils.YELLOW+"=============================================================");
+                    }
+                    
+                }
+                if(player1_Attacker.getbonus_health() > 0){
+
+                    System.out.printf(Utils.YELLOW+"""
+                        =============================================================
+                        Round %d ----> Player %s is playing    
+                            """, round, this.player1.getName());
+                    player1_Attacker.setHealth(player1_Attacker.getHealth()*1.1);;
+
+                    System.out.println(player1_Attacker.getName() + " health increased " );
+
+                  
+                    System.out.println(player1_Attacker.getName() + " has " + player1_Attacker.getHealth() + " health left");
+                    System.out.println(Utils.YELLOW+"=============================================================");
+                    
+                    
+                }
+
             } else{
                 this.originalPlayer2.setXp(this.originalPlayer2.getXp() + 1);
 
@@ -136,14 +177,14 @@ public class Battle {
 
                 if (player2_Attacker instanceof Healer){
                     Character healingCharacter = Collections.min(player2_DefenceList, Comparator.comparingDouble(Character::getHealth));
-                    player2_Attacker.attack(healingCharacter);
+                    player2_Attacker.attack(healingCharacter, 1);
 
                     System.out.println(player2_Attacker.getName() + " heals " + healingCharacter.getName());
                     System.out.println(healingCharacter.getName() + " health has increased to " + healingCharacter.getHealth());
                     System.out.println(Utils.BLUE+"=============================================================");
                 }
                 else{
-                    player2_Attacker.attack(player1_Defender);
+                    player2_Attacker.attack(player1_Defender, 1);
 
                     System.out.println(player2_Attacker.getName() + " attacks " + player1_Defender.getName());
 
@@ -157,6 +198,46 @@ public class Battle {
                         System.out.println(player1_Defender.getName() + " has " + player1_Defender.getHealth() + " health left");
                         System.out.println(Utils.BLUE+"=============================================================");
                     }
+                }
+                //bonus attack
+                if(player2_Attacker.getbonus_attack() > 0){
+
+                    System.out.printf(Utils.BLUE+"""
+                        =============================================================
+                        Round %d ----> Player %s is playing Bonus attack   
+                            """, round, this.player2.getName());
+                    System.out.println("-------------------------------------------------------------");
+                    player2_Attacker.attack(player1_Defender, 1);
+
+                    System.out.println(player2_Attacker.getName() + " attacks " + player1_Defender.getName());
+
+                    if (player1_Defender.getHealth() <= 0){
+                        player1_DefenceList.remove(player1_Defender);
+                        player1_AttackList.remove(player1_Defender);
+                        System.out.println(Utils.RED + player1_Defender.getName() + " is eliminated");
+                        System.out.println(Utils.BLUE+"=============================================================");
+                    }
+                    else{
+                        System.out.println(player1_Defender.getName() + " has " + player1_Defender.getHealth() + " health left");
+                        System.out.println(Utils.BLUE+"=============================================================");
+                    }
+                    
+                }
+                if(player2_Attacker.getbonus_health() > 0){
+
+                    System.out.printf(Utils.BLUE+"""
+                        =============================================================
+                        Round %d ----> Player %s is playing    
+                            """, round, this.player2.getName());
+                    player2_Attacker.setHealth(player2_Attacker.getHealth()*1.1);;
+
+                    System.out.println(player2_Attacker.getName() + " health increased " );
+
+                  
+                    System.out.println(player2_Attacker.getName() + " has " + player2_Attacker.getHealth() + " health left");
+                    System.out.println(Utils.BLUE+"=============================================================");
+                    
+                    
                 }
             }
             else{

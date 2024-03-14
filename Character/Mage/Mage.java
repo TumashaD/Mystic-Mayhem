@@ -44,9 +44,5 @@ public class Mage extends Character{
       }
     }
 
-    @Override
-    public void attack(Character character){
-        double damage = 0.5*this.attack - 0.1*character.getDefense();
-        character.setHealth(Math.round((character.getHealth() - damage) * 10) / 10.0);
-    }
+
 }
