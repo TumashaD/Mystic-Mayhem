@@ -39,8 +39,8 @@ public class Healer extends Character {
     }
     
     @Override
-    public void attack(Character character){
-        double heal = 0.5*this.attack;
+    public void attack(Character character, double effect){
+        double heal = 0.5*this.attack*effect;
         character.setHealth(Math.round((character.getHealth() +heal) * 10) / 10.0);
     }
     

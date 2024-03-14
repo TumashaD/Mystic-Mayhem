@@ -15,10 +15,23 @@ public abstract class Character implements Serializable{
     protected int speed;
     protected int attack_priority;
     protected int defense_priority;
+
+    protected double attack_bonus;
+    protected double health_bonus;
+    
+    
+    public void equipment(Equipment equipment){
+        this.attack += equipment.attack;
+        this.defense += equipment.defense;
+        this.health += equipment.health;
+        this.speed += equipment.speed;
+        this.price += equipment.price*0.2;
+    }
     protected double bonus_turn;
 
     protected Armour armour;
     protected Artifact artifact;
+
 
 
     public void setBattleGround(String battleGround){
@@ -27,7 +40,8 @@ public abstract class Character implements Serializable{
                     if(this.category == "Highlander"){
                         this.attack += 1;
                         this.defense += 1;
-                        this.bonus_turn = 0.2;
+                        this.attack += this.attack*0.2;
+                        this.attack_bonus = 0.2;
                     }
                     else if(this.category == "Marshlander"){
                         this.speed -= 1;
@@ -68,7 +82,7 @@ public abstract class Character implements Serializable{
                         this.attack -= 1;         
                     }
                     else if(this.category == "Mystic"){
-                        this.bonus_turn = 0.1;
+                        this.health_bonus = 0.1;
                     }
                     
                 break;
@@ -154,6 +168,18 @@ public abstract class Character implements Serializable{
     public String getCategory() {
         return category;
     }
+    public double getbonus_attack(){
+        return this.attack_bonus;
+    }
+    public double getbonus_health(){
+        return this.health_bonus;
+    }
+
+
+    public void attack(Character character, double effect ){
+        double damage = 0.5*this.attack*effect - 0.1*character.getDefense();
+        character.setHealth(Math.round((character.getHealth() - damage) * 10) / 10.0);
+    }
 
     public String getArmourName() {
         if (armour == null) {
@@ -173,7 +199,7 @@ public abstract class Character implements Serializable{
         }
     }
 
-    public void attack(Character character){}
+
 }
 
 
