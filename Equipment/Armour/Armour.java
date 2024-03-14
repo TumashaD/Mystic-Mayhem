@@ -16,6 +16,10 @@ public class Armour extends Equipment{
                 this.name = name;
                 this.price = 150;this.defense = 2;this.health = 1;this.speed = -1;
                 break;
+            default:
+                this.name = "None";
+                this.price = 0; this.defense = 0; this.health = 0; this.speed = 0;
+                break;
         }
     }
 }

@@ -58,6 +58,14 @@ public class Utils {
 
         Enter Your Choice: """;
 
+    static final String firstPlayOptions = """
+        Choose an option...
+
+        [1] Create Profile
+        [2] Go Back
+
+        Enter Your Choice: """;
+
     static final String profileOptions = """
         Choose an option...
 
@@ -77,6 +85,7 @@ public class Utils {
             choice = input.nextInt();
         }
         if (choice == 1) {
+            Utils.clearScreen();
             PlayGame.playGame(player);
         }
 
@@ -109,8 +118,8 @@ public class Utils {
         MythicalCreature dragon = new MythicalCreature("Dragon");
         Armour chainmail = new Armour("Chainmail");
         Artifact amulet = new Artifact("Amulet");
-        ranger.setEquipment(chainmail);
-        medic.setEquipment(amulet);
+        ranger.setArmour(chainmail);
+        medic.setArtifact(amulet);
 
         boss.setArcher(ranger);
         boss.setKnight(squire);

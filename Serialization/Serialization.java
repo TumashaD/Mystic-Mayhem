@@ -36,15 +36,16 @@ public class Serialization {
         }
     }
 
-    public static List<Player> deserializing(){
-        List<Player> list =new ArrayList<Player>();
-        try{
+    public static List<Player> deserializing() {
+        List<Player> list = new ArrayList<Player>();
+        try {
             FileInputStream fileStream2 = new FileInputStream("./Save/playerData.ser");
             ObjectInputStream savedPlayerData = new ObjectInputStream(fileStream2);
             list = (List<Player>) savedPlayerData.readObject();
             savedPlayerData.close();
-        }
-        catch (Exception e){
+        } catch (FileNotFoundException e) { 
+            System.out.print("");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;

@@ -9,22 +9,29 @@ import Battle.Battle;
 public class PlayGame extends Utils{
     public static void playGame(Player player){
         Scanner input = new Scanner(System.in);
-        Utils.clearScreen();
         System.out.println(ORANGE+ Utils.initScreen+ RESET);
-        System.out.print(YELLOW + Utils.playOptions + RESET);
+        int n ;
+        if (players.size() == 0){
+            System.out.print(YELLOW + Utils.firstPlayOptions + RESET);
+            n = 2;
+        }
+        else {
+            System.out.print(YELLOW + Utils.playOptions + RESET);
+            n = 3;
+        }
         int choice = input.nextInt();
 
-        while (choice < 1 || choice > 3) {
+        while (choice < 1 || choice > n) {
             System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
             choice = input.nextInt();
         }
-        if (choice ==1 ){
+        if (choice == 1 && n == 3){
             Utils.clearScreen();
-            System.out.println(ORANGE + Utils.initScreen + RESET);
+            System.out.print(ORANGE + initScreen + RESET);
             SelectProfile.showProfiles();
         }
 
-        if (choice == 2) {
+        if ((choice == 1 && n == 2) || (choice == 2 && n == 3)){ 
             Player newPlayer = CreateProfile.createProfile();
             Utils.clearScreen();
             
@@ -41,9 +48,9 @@ public class PlayGame extends Utils{
         }
         if (choice == 3) {
             Utils.clearScreen();
-            Utils.mainMenu(player);
-        }
+            mainMenu(player);}
     }
+
     public static void profileOptions(Player player){
         Scanner input = new Scanner(System.in);
         System.out.println(ORANGE + Utils.initScreen + RESET);
@@ -60,6 +67,12 @@ public class PlayGame extends Utils{
             Player oppponent = SelectProfile.showOpponents(player);
             Battle battle = new Battle(player, oppponent);
             System.out.println(battle.startBattle());
+            System.out.println("Press Enter to continue...");
+            input.nextLine();
+            input.nextLine();
+            
+            Utils.clearScreen();
+            profileOptions(player);
         }
 
         if (choice == 2){

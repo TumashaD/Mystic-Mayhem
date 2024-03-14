@@ -17,6 +17,10 @@ public class Artifact extends Equipment{
                 this.name = name;
                 this.price = 210; this.attack = 2; this.defense = 1; this.health = -1; this.speed = -1;
                 break;
+            default:
+                this.name = "None";
+                this.price = 0; this.attack = 0; this.defense = 0; this.health = 0; this.speed = 0;
+                break;
         }
     }
 }
