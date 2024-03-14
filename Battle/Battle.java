@@ -59,7 +59,7 @@ public class Battle {
 
         pause(500);
         
-        for (int i = 0; i < 15; i++){
+        for (int i = 0; i < 10; i++){
 
             if(player1_AttackList.size()==0){
                 this.originalPlayer2.setXp(this.originalPlayer2.getXp() + 1);
@@ -115,6 +115,9 @@ public class Battle {
                 if (player2_Defender.getHealth() <= 0){
                     player2_DefenceList.remove(player2_Defender);
                     player2_AttackList.remove(player2_Defender);
+
+                    System.out.println(player2_AttackList);
+                    
                     System.out.println(Utils.RED + player2_Defender.getName() + " is eliminated");
                     System.out.println(Utils.YELLOW+"=============================================================");
                 }
@@ -139,6 +142,9 @@ public class Battle {
                     if (player2_Defender.getHealth() <= 0){
                         player2_DefenceList.remove(player2_Defender);
                         player2_AttackList.remove(player2_Defender);
+
+                        System.out.println(player2_AttackList);
+
                         System.out.println(Utils.RED + player2_Defender.getName() + " is eliminated");
                         System.out.println(Utils.YELLOW+"=============================================================");
                     }
@@ -206,6 +212,8 @@ public class Battle {
                     if (player1_Defender.getHealth() <= 0){
                         player1_DefenceList.remove(player1_Defender);
                         player1_AttackList.remove(player1_Defender);
+
+                        System.out.println(player1_AttackList);
                         System.out.println(Utils.RED + player1_Defender.getName() + " is eliminated");
                         System.out.println(Utils.BLUE+"=============================================================");
                     }
@@ -229,6 +237,9 @@ public class Battle {
                     if (player1_Defender.getHealth() <= 0){
                         player1_DefenceList.remove(player1_Defender);
                         player1_AttackList.remove(player1_Defender);
+
+                        System.out.println(player1_AttackList);
+
                         System.out.println(Utils.RED + player1_Defender.getName() + " is eliminated");
                         System.out.println(Utils.BLUE+"=============================================================");
                     }
