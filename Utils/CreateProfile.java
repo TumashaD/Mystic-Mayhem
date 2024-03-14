@@ -33,18 +33,17 @@ public class CreateProfile extends Utils{
     );
     public static Player createProfile() {
         Utils.clearScreen();
-        Scanner input = new Scanner(System.in);
         System.out.println(GREEN +"""
             ===========================================
             |           CREATE NEW PROFILE            |
             ===========================================
                 """ + RESET);
         System.out.print(YELLOW + "Enter your name: ");
-        String name = input.nextLine();
+        String name = getName();
         System.out.println();
         
-        System.out.print("Enter your username: ");
-        String userName = input.nextLine();
+        System.out.print(YELLOW+"Enter your username: ");
+        String userName = getName();
         if (players.size() > 0){
             for (Player p : players){
                 boolean isValidUsername = false;
@@ -53,7 +52,7 @@ public class CreateProfile extends Utils{
                     if (p.getUserName().equals(userName) || Utils.bossOpponent().getUserName().equals(userName)) {
                         System.out.println(RED + "Profile Already Exists!" + RESET);
                         System.out.print(YELLOW+"Enter a new username: ");
-                        userName = input.nextLine();
+                        userName = getName();
                     } else {
                         isValidUsername = true;
                     }
@@ -62,7 +61,7 @@ public class CreateProfile extends Utils{
         }
         System.out.println();
 
-        System.out.println("Select a home ground: \n");
+        System.out.println(YELLOW+"Select a home ground: \n");
         System.out.print("""
                 [1] Hillcrest
                 [2] Marshland
@@ -71,12 +70,7 @@ public class CreateProfile extends Utils{
 
                 Your choice: """ );
 
-        int homeGround = input.nextInt();
-
-        while (homeGround < 1 || homeGround > 4) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            homeGround = input.nextInt();
-        }
+        int homeGround = getChoice(4);
         Player player = new Player(name, userName, homeGrounds[homeGround-1]);
         return player;
         
