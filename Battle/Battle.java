@@ -59,7 +59,7 @@ public class Battle {
 
         pause(500);
         
-        for (int i = 0; i < 15; i++){
+        for (int i = 0; i < 10; i++){
 
             if(player1_AttackList.size()==0){
                 this.originalPlayer2.setXp(this.originalPlayer2.getXp() + 1);
@@ -92,14 +92,14 @@ public class Battle {
             //player1 attack
             round++;
             System.out.println();
-            // pause(2000);
+            pause(2000);
               
             System.out.printf(Utils.YELLOW+"""
             =============================================================
             Round %d ----> Player %s is playing   
             """, round, this.player1.getName());
             System.out.println("-------------------------------------------------------------");
-            // pause(2000);
+            pause(2000);
             Character player2_Defender = player2_DefenceList.get(0);
 
                 if (player1_Attacker instanceof Healer){
@@ -180,7 +180,7 @@ public class Battle {
 
             round++;
             System.out.println();
-            // pause(2000);
+            pause(2000);
             
             if (player2_AttackList.size() > 0){
                 System.out.printf(Utils.BLUE+"""
@@ -188,7 +188,7 @@ public class Battle {
                 Round %d ----> Player %s is playing   
                         """, round, this.player2.getName());
                 System.out.println("-------------------------------------------------------------");
-                // pause(2000);
+                pause(2000);
                 Character player1_Defender = player1_DefenceList.get(0);
                 
                 if (player2_Attacker instanceof Healer){

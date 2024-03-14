@@ -1,5 +1,6 @@
 package Utils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -26,8 +27,11 @@ public class Utils {
     public static final List<Player> players = Serialization.deserializing();
 
     public static void clearScreen() {
-        System.out.print("\033[H\033[2J"); // Clear the screen
-        System.out.flush();
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     
 
