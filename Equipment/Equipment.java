@@ -1,6 +1,8 @@
 package Equipment;
 
-public abstract class Equipment {
+import java.io.Serializable;
+
+public abstract class Equipment implements Serializable {
     public String name;
     public int price;
     public int attack = 0;
@@ -10,5 +12,11 @@ public abstract class Equipment {
 
     public int getPrice(){
         return price;
+    }
+    public String getName(){
+        if (name == null) {
+            return "";
+        }
+        return name;
     }
 }

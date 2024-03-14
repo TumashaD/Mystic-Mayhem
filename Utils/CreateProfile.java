@@ -62,15 +62,14 @@ public class CreateProfile extends Utils{
         }
         System.out.println();
 
-        System.out.println("Select a home ground:");
-        System.out.println("""
+        System.out.println("Select a home ground: \n");
+        System.out.print("""
                 [1] Hillcrest
                 [2] Marshland
                 [3] Desert
                 [4] Arcane
 
-                Your choice:
-                """ );
+                Your choice: """ );
 
         int homeGround = input.nextInt();
 
@@ -85,7 +84,7 @@ public class CreateProfile extends Utils{
 
     public static Boolean createArmy(Player player, Boolean isRunOut) {
         Scanner input = new Scanner(System.in);
-        double gc = player.getCoins();
+        int gc = player.getCoins();
         int choice;
         System.out.println(ORANGE +"""                            
                                             ===========================================
@@ -102,15 +101,17 @@ public class CreateProfile extends Utils{
                 ===========================================
             """ + YELLOW);
         }
-        System.out.println("\nYou have " + gc + " gold coins to spend. \n");
-
+        
         for (String key : characters.keySet()) {
-            System.out.println(ORANGE + "Select a " + key + ":");
+            Utils.clearScreen();
+            CharacterTable.characterTable();
+            System.out.println(YELLOW+"\nYou have " + gc + " gold coins to spend.\n"+RESET);
+            System.out.println(ORANGE + "Select a " + key + ":\n" + RESET);
             String[] characterList = characters.get(key);
             for (int i = 0; i < characterList.length; i++) {
-                System.out.println(" [" + (i+1) + "]" + characterList[i]);
+                System.out.println(ORANGE+" [" + (i+1) + "]" + characterList[i]);
             }
-            System.out.print("Your choice: ");
+            System.out.print("\nYour choice: "+RESET);
             choice = input.nextInt();
             while (choice < 1 || choice > characterList.length) {
                 System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
@@ -145,7 +146,6 @@ public class CreateProfile extends Utils{
                 default:
                     break;
             }
-            System.out.println(YELLOW+"\nYou have " + gc + " gold coins left."+RESET);
             System.out.println();
             if (gc <= 0) {
                 return true;

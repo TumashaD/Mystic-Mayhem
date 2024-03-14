@@ -2,6 +2,8 @@ package Character;
 import java.io.Serializable;
 
 import Equipment.Equipment;
+import Equipment.Armour.Armour;
+import Equipment.Artifacts.Artifact;
 
 public abstract class Character implements Serializable{
     protected String category;
@@ -13,15 +15,9 @@ public abstract class Character implements Serializable{
     protected int speed;
     protected int attack_priority;
     protected int defense_priority;
-    
-    
-    public void equipment(Equipment equipment){
-        this.attack += equipment.attack;
-        this.defense += equipment.defense;
-        this.health += equipment.health;
-        this.speed += equipment.speed;
-        this.price += equipment.price*0.2;
-    }
+
+    protected Armour armour;
+    protected Artifact artifact;
 
 
     public void setBattleGround(String battleGround){
@@ -104,12 +100,42 @@ public abstract class Character implements Serializable{
     public int getPrice(){
         return this.price;
     }
-    public void setEquipment(Equipment equipment){
-        this.attack += equipment.attack;
-        this.defense += equipment.defense;
-        this.health += equipment.health;
-        this.speed += equipment.speed;
-        this.price += equipment.price*0.2;
+    public void setArmour(Armour armour){
+        if (this.armour == null) {
+            this.armour = new Armour(armour.getName());
+            this.attack = this.attack + armour.attack;
+            this.defense = this.defense + armour.defense;
+            this.health = this.health + armour.health;
+            this.speed = this.speed + armour.speed;
+            this.price = (int) (this.price + armour.price*0.2);
+        }
+        else{
+            this.attack = this.attack - this.armour.attack + armour.attack;
+            this.defense = this.defense - this.armour.defense + armour.defense;
+            this.health = this.health - this.armour.health + armour.health;
+            this.speed = this.speed - this.armour.speed + armour.speed;
+            this.price = (int) (this.price - this.armour.price*0.2 + armour.price*0.2);
+            this.armour = armour;
+        }
+    }
+
+    public void setArtifact(Artifact artifact){
+        if (this.artifact == null) {
+            this.artifact = new Artifact(artifact.getName());
+            this.attack = this.attack + artifact.attack;
+            this.defense = this.defense + artifact.defense;
+            this.health = this.health + artifact.health;
+            this.speed = this.speed + artifact.speed;
+            this.price = (int) (this.price + artifact.price*0.2);
+        }
+        else{
+            this.attack = this.attack - this.artifact.attack + artifact.attack;
+            this.defense = this.defense - this.artifact.defense + artifact.defense;
+            this.health = this.health - this.artifact.health + artifact.health;
+            this.speed = this.speed - this.artifact.speed + artifact.speed;
+            this.price = (int) (this.price - this.artifact.price*0.2 + artifact.price*0.2);
+            this.artifact = artifact;
+        }
     }
     public final int getdiffence(){
         return this.defense;
@@ -125,6 +151,24 @@ public abstract class Character implements Serializable{
 
     public String getCategory() {
         return category;
+    }
+
+    public String getArmourName() {
+        if (armour == null) {
+            return "";
+        }
+        else{
+            return armour.getName();
+        }
+    }
+
+    public String getArtifactName() {
+        if (artifact == null) {
+            return "";
+        }
+        else{
+            return artifact.getName();
+        }
     }
 
     public void attack(Character character){}

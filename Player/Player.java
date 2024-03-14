@@ -19,7 +19,7 @@ public class Player implements Serializable{
     private String name;
     private String userName;
     private int xp;
-    private double coins;
+    private int coins;
     private String homeGround;
 
     //Army
@@ -34,7 +34,7 @@ public class Player implements Serializable{
         this.userName = userName;
         this.coins = 500;
         this.homeGround = homeGround;
-        this.xp = 0;
+        this.xp = 1;
     }
 
     // Archer getter and setter
@@ -45,11 +45,20 @@ public class Player implements Serializable{
         return archer;
     }
 
-    public void buyArcher(Archer archer){
+    public boolean buyArcher(Archer archer){
         int sellingPrice = this.archer.getPrice()*90/100;
-        this.coins = this.coins + sellingPrice - archer.getPrice();
-        this.archer = archer;
+        int coins = this.coins + sellingPrice - archer.getPrice();
+        if (coins < 0){
+            return false;
+        }
+        else{
+            this.archer = archer;
+            this.coins = coins;
+            return true;
+        }
     }
+
+
     
     // Healer getter and setter
     public void setHealer(Healer healer){
@@ -58,10 +67,17 @@ public class Player implements Serializable{
     public Healer getHealer(){
         return healer;
     }
-    public void buyHealer(Healer healer){
+    public boolean buyHealer(Healer healer){
         int sellingPrice = this.healer.getPrice()*90/100;
-        this.coins = this.coins + sellingPrice - healer.getPrice();
-        this.healer = healer;
+        int coins = this.coins + sellingPrice - healer.getPrice();
+        if (coins < 0){
+            return false;
+        }
+        else{
+            this.healer = healer;
+            this.coins = coins;
+            return true;
+        }
     }
 
     // Knight getter and setter
@@ -71,10 +87,17 @@ public class Player implements Serializable{
     public Knight getKnight(){
         return knight;
     }
-    public void buyKnight(Knight knight){
+    public boolean buyKnight(Knight knight){
         int sellingPrice = this.knight.getPrice()*90/100;
-        this.coins = this.coins + sellingPrice - knight.getPrice();
-        this.knight = knight;
+        int coins = this.coins + sellingPrice - knight.getPrice();
+        if (coins < 0){
+            return false;
+        }
+        else{
+            this.knight = knight;
+            this.coins = coins;
+            return true;
+        }
     }
 
     // Mage getter and setter
@@ -84,10 +107,17 @@ public class Player implements Serializable{
     public Mage getMage(){
         return mage;
     }
-    public void buyMage(Mage mage){
+    public boolean buyMage(Mage mage){
         int sellingPrice = this.mage.getPrice()*90/100;
-        this.coins = this.coins + sellingPrice - mage.getPrice();
-        this.mage = mage;
+        int coins = this.coins + sellingPrice - mage.getPrice();
+        if (coins < 0){
+            return false;
+        }
+        else{
+            this.mage = mage;
+            this.coins = coins;
+            return true;
+        }
     }
 
     // MythicalCreature getter and setter
@@ -97,14 +127,28 @@ public class Player implements Serializable{
     public MythicalCreature getMythicalCreature(){
         return mythicalCreature;
     }
-    public void buyMythicalCreature(MythicalCreature mythicalCreature){
+    public boolean buyMythicalCreature(MythicalCreature mythicalCreature){
         int sellingPrice = this.mythicalCreature.getPrice()*90/100;
-        this.coins = this.coins + sellingPrice - mythicalCreature.getPrice();
-        this.mythicalCreature = mythicalCreature;
+        int coins = this.coins + sellingPrice - mythicalCreature.getPrice();
+        if (coins < 0){
+            return false;
+        }
+        else{
+            this.mythicalCreature = mythicalCreature;
+            this.coins = coins;
+            return true;
+        }
     }
 
-    public void buyEquipment(Equipment equipment){
-        this.coins = this.coins - equipment.getPrice();
+    public boolean buyEquipment(Equipment equipment){
+        int coins = this.coins - equipment.getPrice();
+        if (coins < 0){
+            return false;
+        }
+        else{
+            this.coins = coins;
+            return true;
+        }
     }
 
     public void setXp(int xp){
@@ -115,9 +159,9 @@ public class Player implements Serializable{
     }
 
     public void setCoins(double coins){
-        this.coins = Math.round(coins * 10) / 10.0;
+        this.coins = (int) coins;
     }
-    public double getCoins(){
+    public int getCoins(){
         return coins;
     }
 
