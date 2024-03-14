@@ -88,18 +88,18 @@ public class Battle {
 
             Character player1_Attacker = player1_AttackList.get(player1_Index); //player 1 attacker
             Character player2_Attacker = player2_AttackList.get(player2_Index); //player 2 attacker
-
+            
             //player1 attack
             round++;
             System.out.println();
-            pause(2000);
+            pause(1000);
               
             System.out.printf(Utils.YELLOW+"""
             =============================================================
             Round %d ----> Player %s is playing   
             """, round, this.player1.getName());
             System.out.println("-------------------------------------------------------------");
-            pause(2000);
+            pause(1000);
             Character player2_Defender = player2_DefenceList.get(0);
 
                 if (player1_Attacker instanceof Healer){
@@ -118,8 +118,6 @@ public class Battle {
                 if (player2_Defender.getHealth() <= 0){
                     player2_DefenceList.remove(player2_Defender);
                     player2_AttackList.remove(player2_Defender);
-
-                    System.out.println(player2_AttackList);
                     
                     System.out.println(Utils.RED + player2_Defender.getName() + " is eliminated");
                     System.out.println(Utils.YELLOW+"=============================================================");
@@ -145,8 +143,6 @@ public class Battle {
                     if (player2_Defender.getHealth() <= 0){
                         player2_DefenceList.remove(player2_Defender);
                         player2_AttackList.remove(player2_Defender);
-
-                        System.out.println(player2_AttackList);
 
                         System.out.println(Utils.RED + player2_Defender.getName() + " is eliminated");
                         System.out.println(Utils.YELLOW+"=============================================================");
@@ -184,9 +180,11 @@ public class Battle {
                 }
             }
 
+            player2_Attacker = player2_AttackList.get(player2_Index); //player 2 attackers
+
             round++;
             System.out.println();
-            pause(2000);
+            pause(1000);
             
             if (player2_AttackList.size() > 0){
                 System.out.printf(Utils.BLUE+"""
@@ -194,7 +192,7 @@ public class Battle {
                 Round %d ----> Player %s is playing   
                         """, round, this.player2.getName());
                 System.out.println("-------------------------------------------------------------");
-                pause(2000);
+                pause(1000);
                 Character player1_Defender = player1_DefenceList.get(0);
                 
                 if (player2_Attacker instanceof Healer){
@@ -214,7 +212,6 @@ public class Battle {
                         player1_DefenceList.remove(player1_Defender);
                         player1_AttackList.remove(player1_Defender);
 
-                        System.out.println(player1_AttackList);
                         System.out.println(Utils.RED + player1_Defender.getName() + " is eliminated");
                         System.out.println(Utils.BLUE+"=============================================================");
                     }
@@ -238,8 +235,6 @@ public class Battle {
                     if (player1_Defender.getHealth() <= 0){
                         player1_DefenceList.remove(player1_Defender);
                         player1_AttackList.remove(player1_Defender);
-
-                        System.out.println(player1_AttackList);
 
                         System.out.println(Utils.RED + player1_Defender.getName() + " is eliminated");
                         System.out.println(Utils.BLUE+"=============================================================");
