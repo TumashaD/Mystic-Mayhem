@@ -108,7 +108,7 @@ public abstract class Character implements Serializable{
         return health;
     }
     public void setHealth(double health){
-        this.health = health;
+        this.health = Math.round(health * 10) / 10.0;
     }
 
     public int getSpeed(){

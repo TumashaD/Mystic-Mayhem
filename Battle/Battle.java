@@ -155,14 +155,12 @@ public class Battle {
 
                     System.out.printf(Utils.YELLOW+"""
                         =============================================================
-                        Round %d ----> Player %s is playing    
-                            """, round, this.player1.getName());
+                            """);
                     player1_Attacker.setHealth(player1_Attacker.getHealth()*1.1);;
 
                     System.out.println(player1_Attacker.getName() + " health increased " );
 
-                  
-                    System.out.println(player1_Attacker.getName() + " has " + player1_Attacker.getHealth() + " health left");
+                    System.out.println(player1_Attacker.getName() + " health has increased to " + player1_Attacker.getHealth());
                     System.out.println(Utils.YELLOW+"=============================================================");
                     
                     
@@ -244,15 +242,14 @@ public class Battle {
                 if(player2_Attacker.getbonus_health() > 0){
 
                     System.out.printf(Utils.BLUE+"""
-                        =============================================================
-                        Round %d ----> Player %s is playing    
-                            """, round, this.player2.getName());
+                        =============================================================                         
+                            """);
                     player2_Attacker.setHealth(player2_Attacker.getHealth()*1.1);;
 
                     System.out.println(player2_Attacker.getName() + " health increased " );
 
                   
-                    System.out.println(player2_Attacker.getName() + " has " + player2_Attacker.getHealth() + " health left");
+                    System.out.println(player2_Attacker.getName() + " health has increased to " + player2_Attacker.getHealth());
                     System.out.println(Utils.BLUE+"=============================================================");
                     
                     
