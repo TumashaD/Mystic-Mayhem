@@ -102,6 +102,7 @@ public class Battle {
             pause(1000);
             Character player2_Defender = player2_DefenceList.get(0);
 
+
                 if (player1_Attacker instanceof Healer){
                     Character healingCharacter = Collections.min(player1_DefenceList, Comparator.comparingDouble(Character::getHealth));
                     player1_Attacker.attack(healingCharacter, 1);
@@ -111,11 +112,13 @@ public class Battle {
                     System.out.println(Utils.YELLOW+"=============================================================");
                 }
                 else{
+
                     player1_Attacker.attack(player2_Defender, 1);
 
+                
                 System.out.println(player1_Attacker.getName() + " attacks " + player2_Defender.getName());
 
-                if (player2_Defender.getHealth() <= 0){
+                if (player2_Defender.getHealth() <= 0.0){
                     player2_DefenceList.remove(player2_Defender);
                     player2_AttackList.remove(player2_Defender);
                     
@@ -140,7 +143,7 @@ public class Battle {
 
                     System.out.println(player1_Attacker.getName() + " attacks " + player2_Defender.getName());
 
-                    if (player2_Defender.getHealth() <= 0){
+                    if (player2_Defender.getHealth() <= 0.0){
                         player2_DefenceList.remove(player2_Defender);
                         player2_AttackList.remove(player2_Defender);
 
@@ -173,10 +176,12 @@ public class Battle {
             if(player2_AttackList.size()>0){
                 if (player2_Index >= player2_AttackList.size()){
                     player2_Index = 0;
-                }else if (player2_Attacker == player2_AttackList.get(player2_Index) && player2_Index+1 < player2_AttackList.size()){
-                    player2_Index++;
                 }else if (player2_Index+1 == player2_AttackList.size()){
                     player2_Index = 0;
+                }
+
+                if (player2_Attacker == player2_AttackList.get(player2_Index) && player2_Index+1 < player2_AttackList.size()&& i>0){
+                    player2_Index++;
                 }
             }
 
@@ -185,6 +190,7 @@ public class Battle {
             round++;
             System.out.println();
             pause(1000);
+
             
             if (player2_AttackList.size() > 0){
                 System.out.printf(Utils.BLUE+"""
@@ -194,6 +200,7 @@ public class Battle {
                 System.out.println("-------------------------------------------------------------");
                 pause(1000);
                 Character player1_Defender = player1_DefenceList.get(0);
+
                 
                 if (player2_Attacker instanceof Healer){
                     Character healingCharacter = Collections.min(player2_DefenceList, Comparator.comparingDouble(Character::getHealth));
@@ -204,11 +211,12 @@ public class Battle {
                     System.out.println(Utils.BLUE+"=============================================================");
                 }
                 else{
+
                     player2_Attacker.attack(player1_Defender, 1);
 
                     System.out.println(player2_Attacker.getName() + " attacks " + player1_Defender.getName());
 
-                    if (player1_Defender.getHealth() <= 0){
+                    if (player1_Defender.getHealth() <= 0.0){
                         player1_DefenceList.remove(player1_Defender);
                         player1_AttackList.remove(player1_Defender);
 
@@ -232,7 +240,7 @@ public class Battle {
 
                     System.out.println(player2_Attacker.getName() + " attacks " + player1_Defender.getName());
 
-                    if (player1_Defender.getHealth() <= 0){
+                    if (player1_Defender.getHealth() <= 0.0){
                         player1_DefenceList.remove(player1_Defender);
                         player1_AttackList.remove(player1_Defender);
 
@@ -246,6 +254,7 @@ public class Battle {
                     
                 }
                 if(player2_Attacker.getbonus_health() > 0){
+
 
                     System.out.printf(Utils.BLUE+"""
                         =============================================================                         
@@ -290,11 +299,13 @@ public class Battle {
             if(player1_AttackList.size()>0){
                 if (player1_Index >= player1_AttackList.size()){
                     player1_Index = 0;
-                } else if (player1_Attacker == player1_AttackList.get(player1_Index) && player1_Index+1 < player1_AttackList.size()){
-                    player1_Index++;
-                } else if (player1_Index+1 == player1_AttackList.size()){
+                }else if (player1_Index+1 == player1_AttackList.size()){
                     player1_Index = 0;
                 }
+
+                if (player1_Attacker == player1_AttackList.get(player1_Index) && player1_Index+1 < player1_AttackList.size() ){
+                    player1_Index++;
+                } 
             }
 
 
