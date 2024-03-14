@@ -16,8 +16,8 @@ public abstract class Character implements Serializable{
     protected int attack_priority;
     protected int defense_priority;
 
-    protected double attack_bonus;
-    protected double health_bonus;
+    protected double attack_bonus = 0;
+    protected double health_bonus = 0;
     
     
     public void equipment(Equipment equipment){
@@ -35,53 +35,54 @@ public abstract class Character implements Serializable{
 
 
     public void setBattleGround(String battleGround){
+       
         switch (battleGround) {
-            case "Hillcrest":
-                    if(this.category == "Highlander"){
+            case "Hillcrest": 
+                    if(this.category.equals("Highlander")){
                         this.attack += 1;
                         this.defense += 1;
                         this.attack += this.attack*0.2;
                         this.attack_bonus = 0.2;
                     }
-                    else if(this.category == "Marshlander"){
+                    else if(this.category.equals("Marshlander")){
                         this.speed -= 1;
                     }
-                    else if(this.category == "Sunchild"){
+                    else if(this.category.equals("Sunchild")){
                         this.speed -= 1;
                     }
-                    else if(this.category == "Mystic"){
+                    else if(this.category.equals("Mystic")){
                         this.speed += 0.1*this.speed;
                     }
                 break;
             case "Marshland":
-                    if(this.category == "Marshlander"){
+                    if(this.category.equals("Marshlander")){
                         this.defense += 2;           
                     }
-                    else if(this.category == "Sunchild"){
+                    else if(this.category.equals("Sunchild")){
                         this.attack -= 1;         
                     }
-                    else if(this.category == "Mystic"){
+                    else if(this.category.equals("Mystic")){
                         this.speed -= 1;
                     }
                     break;
             case "Desert":
-                if(this.category == "Marshlander"){
+                if(this.category.equals("Marshlander")){
                     this.health -= 1;           
                 }
-                else if(this.category == "Sunchild"){
+                else if(this.category.equals("Sunchild")){
                     this.attack += 1;         
                 }
                 break;
 
             case "Arcane":
-                if(this.category == "Marshlander" || this.category == "Highlander"){
+                if(this.category.equals("Marshlander")|| this.category.equals("Highlander")){
                         this.defense -= 1; 
                         this.speed -= 1;          
                     }
-                    else if(this.category == "Sunchild"){
+                    else if(this.category.equals("Sunchild")){
                         this.attack -= 1;         
                     }
-                    else if(this.category == "Mystic"){
+                    else if(this.category.equals("Mystic")){
                         this.health_bonus = 0.1;
                     }
                     
