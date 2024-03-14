@@ -8,7 +8,6 @@ import Battle.Battle;
 
 public class PlayGame extends Utils{
     public static void playGame(Player player){
-        Scanner input = new Scanner(System.in);
         System.out.println(ORANGE+ Utils.initScreen+ RESET);
         int n ;
         if (players.size() == 0){
@@ -19,12 +18,7 @@ public class PlayGame extends Utils{
             System.out.print(YELLOW + Utils.playOptions + RESET);
             n = 3;
         }
-        int choice = input.nextInt();
-
-        while (choice < 1 || choice > n) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
+        int choice = getChoice(n);
         if (choice == 1 && n == 3){
             Utils.clearScreen();
             System.out.print(ORANGE + initScreen + RESET);
@@ -55,13 +49,7 @@ public class PlayGame extends Utils{
         Scanner input = new Scanner(System.in);
         System.out.println(ORANGE + Utils.initScreen + RESET);
         System.out.print(YELLOW + Utils.profileOptions + RESET);
-        int choice = input.nextInt();
-
-        while (choice < 1 || choice > 3) {
-            System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-            choice = input.nextInt();
-        }
-
+        int choice = getChoice(3);
         if (choice == 1) {
             Utils.clearScreen();
             Player oppponent = SelectProfile.showOpponents(player);
@@ -70,7 +58,6 @@ public class PlayGame extends Utils{
             System.out.println("Press Enter to continue...");
             input.nextLine();
             input.nextLine();
-            
             Utils.clearScreen();
             profileOptions(player);
         }

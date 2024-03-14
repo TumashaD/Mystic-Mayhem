@@ -16,6 +16,8 @@ import Views.Board;
 import java.io.Serializable;
 
 public class Player implements Serializable{
+    private static final long serialVersionUID = 5750795826548989086L;
+
     private String name;
     private String userName;
     private int xp;
