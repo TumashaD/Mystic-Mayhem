@@ -27,8 +27,8 @@ public class Battle {
         this.player1 = Serialization.deepCopy(challenger);
         this.player2 = Serialization.deepCopy(defender);
 
-        this.player1.setBattleGround(this.battleGround);
-        this.player2.setBattleGround(this.battleGround);
+        this.player1.setPlayerBattleGround(this.battleGround);
+        this.player2.setPlayerBattleGround(this.battleGround);
     }
 
     private static void pause(int milliseconds) {
@@ -126,6 +126,7 @@ public class Battle {
                 //bonus attack
                 if(player1_Attacker.getbonus_attack() > 0){
 
+                    player2_Defender = player2_DefenceList.get(0);
                     System.out.printf(Utils.YELLOW+"""
                         =============================================================
                         Round %d ----> Player %s is playing Bonus attack   
@@ -188,7 +189,7 @@ public class Battle {
                 System.out.println("-------------------------------------------------------------");
                 // pause(2000);
                 Character player1_Defender = player1_DefenceList.get(0);
-
+                
                 if (player2_Attacker instanceof Healer){
                     Character healingCharacter = Collections.min(player2_DefenceList, Comparator.comparingDouble(Character::getHealth));
                     player2_Attacker.attack(healingCharacter, 1);
@@ -215,7 +216,7 @@ public class Battle {
                 }
                 //bonus attack
                 if(player2_Attacker.getbonus_attack() > 0){
-
+                    player1_Defender = player1_DefenceList.get(0);
                     System.out.printf(Utils.BLUE+"""
                         =============================================================
                         Round %d ----> Player %s is playing Bonus attack   

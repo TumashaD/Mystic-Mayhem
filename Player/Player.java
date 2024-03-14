@@ -208,7 +208,7 @@ public class Player implements Serializable{
         return defencePriority;
     }
 
-    public void setBattleGround(String battleGround){
+    public void setPlayerBattleGround(String battleGround){
         this.archer.setBattleGround(battleGround);
         this.healer.setBattleGround(battleGround);
         this.knight.setBattleGround(battleGround);
