@@ -23,6 +23,10 @@ public class Serialization {
     }
 
     public static boolean serializing(List<Player> list){
+        File saveDir = new File("./Save");
+        if (!saveDir.exists()) {
+            saveDir.mkdir();
+        }
         try{
             FileOutputStream fileStream1 = new FileOutputStream("./Save/playerData.ser");
             ObjectOutputStream os = new ObjectOutputStream(fileStream1);
