@@ -58,22 +58,46 @@ public class Battle {
         int player2_Index = 0;
 
         pause(500);
+        
+        for (int i = 0; i < 15; i++){
 
-        for (int i = 0; i < 10; i++){
+            if(player1_AttackList.size()==0){
+                this.originalPlayer2.setXp(this.originalPlayer2.getXp() + 1);
+                
+                double exchange = 0.1*this.originalPlayer1.getCoins();
+                this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() + exchange);
+                this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() - exchange);
+
+                String result = String.format("""
+                        =============================================================
+                        %s has lost to %s   
+                        ============================================================= 
+                        
+                        Statics:
+                        =============================================================
+                        %s : %d +1 XP || %d + %d Gold Coins
+                        -------------------------------------------------------------
+                        %s : %d -%d Gold Coins
+                        =============================================================
+                        """, this.player1.getName(), this.player2.getName(),player2.getName(),player2.getXp(),player2.getCoins(),(int)exchange,player1.getName(),player1.getCoins(),(int)exchange);
+                return Utils.ORANGE+result+Utils.RESET;
+            }
+
+            Character player1_Attacker = player1_AttackList.get(player1_Index); //player 1 attacker
+            Character player2_Attacker = player2_AttackList.get(player2_Index); //player 2 attacker
+
             //player1 attack
             round++;
             System.out.println();
-            pause(2000);
+            // pause(2000);
+              
             System.out.printf(Utils.YELLOW+"""
-                =============================================================
-                Round %d ----> Player %s is playing   
-                        """, round, this.player1.getName());
+            =============================================================
+            Round %d ----> Player %s is playing   
+            """, round, this.player1.getName());
             System.out.println("-------------------------------------------------------------");
-            pause(2000);
-            Character player1_Attacker = player1_AttackList.get(player1_Index);
-
-            if (player1_AttackList.size() > 0){
-                Character player2_Defender = player2_DefenceList.get(0);
+            // pause(2000);
+            Character player2_Defender = player2_DefenceList.get(0);
 
                 if (player1_Attacker instanceof Healer){
                     Character healingCharacter = Collections.min(player1_DefenceList, Comparator.comparingDouble(Character::getHealth));
@@ -86,19 +110,19 @@ public class Battle {
                 else{
                     player1_Attacker.attack(player2_Defender, 1);
 
-                    System.out.println(player1_Attacker.getName() + " attacks " + player2_Defender.getName());
+                System.out.println(player1_Attacker.getName() + " attacks " + player2_Defender.getName());
 
-                    if (player2_Defender.getHealth() <= 0){
-                        player2_DefenceList.remove(player2_Defender);
-                        player2_AttackList.remove(player2_Defender);
-                        System.out.println(Utils.RED + player2_Defender.getName() + " is eliminated");
-                        System.out.println(Utils.YELLOW+"=============================================================");
-                    }
-                    else{
-                        System.out.println(player2_Defender.getName() + " has " + player2_Defender.getHealth() + " health left");
-                        System.out.println(Utils.YELLOW+"=============================================================");
-                    }
+                if (player2_Defender.getHealth() <= 0){
+                    player2_DefenceList.remove(player2_Defender);
+                    player2_AttackList.remove(player2_Defender);
+                    System.out.println(Utils.RED + player2_Defender.getName() + " is eliminated");
+                    System.out.println(Utils.YELLOW+"=============================================================");
                 }
+                else{
+                    System.out.println(player2_Defender.getName() + " has " + player2_Defender.getHealth() + " health left");
+                    System.out.println(Utils.YELLOW+"=============================================================");
+                }
+            }
                 //bonus attack
                 if(player1_Attacker.getbonus_attack() > 0){
 
@@ -141,39 +165,29 @@ public class Battle {
                     
                 }
 
-            } else{
-                this.originalPlayer2.setXp(this.originalPlayer2.getXp() + 1);
-
-                double exchange = 0.1*this.originalPlayer1.getCoins();
-                this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() + exchange);
-                this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() - exchange);
-
-                String result = String.format("""
-                        =============================================================
-                        %s has lost to %s   
-                        ============================================================= 
-                        
-                        Statics:
-                        =============================================================
-                        %s : %d +1 XP || %d + %d Gold Coins
-                        -------------------------------------------------------------
-                        %s : -%d Gold Coins
-                        =============================================================
-                        """, this.player1.getName(), this.player2.getName(),player2.getName(),player2.getXp(),player2.getCoins(),(int)exchange,player2.getName(),(int)exchange);
-                return Utils.ORANGE+result+Utils.RESET;
+        
+            //update index
+            if(player2_AttackList.size()>0){
+                if (player2_Index >= player2_AttackList.size()){
+                    player2_Index = 0;
+                }else if (player2_Attacker == player2_AttackList.get(player2_Index) && player2_Index+1 < player2_AttackList.size()){
+                    player2_Index++;
+                }else if (player2_Index+1 == player2_AttackList.size()){
+                    player2_Index = 0;
+                }
             }
 
             round++;
             System.out.println();
-            pause(2000);
-            System.out.printf(Utils.BLUE+"""
+            // pause(2000);
+            
+            if (player2_AttackList.size() > 0){
+                System.out.printf(Utils.BLUE+"""
                 =============================================================
                 Round %d ----> Player %s is playing   
                         """, round, this.player2.getName());
-            System.out.println("-------------------------------------------------------------");
-            pause(2000);
-            Character player2_Attacker = player2_AttackList.get(player2_Index);
-            if (player2_AttackList.size() > 0){
+                System.out.println("-------------------------------------------------------------");
+                // pause(2000);
                 Character player1_Defender = player1_DefenceList.get(0);
                 
                 System.out.println("Bonus "+ player2_Attacker.getbonus_attack());
@@ -259,28 +273,23 @@ public class Battle {
                         =============================================================
                         %s : %d +1 XP || %d + %d Gold Coins
                         -------------------------------------------------------------
-                        %s : -%d Gold Coins
+                        %s : %d -%d Gold Coins
                         =============================================================
-                        """, this.player2.getName(), this.player1.getName(),player1.getName(),player1.getXp(),player1.getCoins(),(int)exchange,player2.getName(),(int)exchange);
+                        """, this.player2.getName(), this.player1.getName(),player1.getName(),player1.getXp(),player1.getCoins(),(int)exchange,player2.getName(),player2.getCoins(),(int)exchange);
                 return Utils.ORANGE+result+Utils.RESET;
                 
             }
-
             // update index
-            if (player1_Index >= player1_AttackList.size()){
-                player1_Index = 0;
+            if(player1_AttackList.size()>0){
+                if (player1_Index >= player1_AttackList.size()){
+                    player1_Index = 0;
+                } else if (player1_Attacker == player1_AttackList.get(player1_Index) && player1_Index+1 < player1_AttackList.size()){
+                    player1_Index++;
+                } else if (player1_Index+1 == player1_AttackList.size()){
+                    player1_Index = 0;
+                }
             }
-            if (player1_Attacker == player1_AttackList.get(player1_Index) && player1_Index+1 < player1_AttackList.size()){
-                player1_Index++;
-            }
-            
-            if (player2_Index >= player2_AttackList.size()){
-                player2_Index = 0;
-            }
-            if (player2_Attacker == player2_AttackList.get(player2_Index) && player2_Index+1 < player2_AttackList.size()){
-                player2_Index++;
-            }
-            
+
 
              
         
@@ -292,4 +301,5 @@ public class Battle {
             ===========================================
                     """+Utils.RESET;
     }
+
 }
