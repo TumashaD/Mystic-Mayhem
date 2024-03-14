@@ -192,5 +192,15 @@ public class Utils {
         }
         return choice;
     }
+
+    public static String getName() {
+        Scanner input = new Scanner(System.in);
+        String name = input.nextLine();
+        if (name.length() == 0){
+            System.out.print(RED + "Invalid Input! Please enter a valid name: " + RESET);
+            name = getName();
+        }
+        return name;
+    }
 }
 
