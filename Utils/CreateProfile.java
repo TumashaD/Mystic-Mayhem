@@ -83,7 +83,6 @@ public class CreateProfile extends Utils{
     }
 
     public static Boolean createArmy(Player player, Boolean isRunOut) {
-        Scanner input = new Scanner(System.in);
         int gc = player.getCoins();
         int choice;
         System.out.println(ORANGE +"""                            
@@ -112,11 +111,7 @@ public class CreateProfile extends Utils{
                 System.out.println(ORANGE+" [" + (i+1) + "]" + characterList[i]);
             }
             System.out.print("\nYour choice: "+RESET);
-            choice = input.nextInt();
-            while (choice < 1 || choice > characterList.length) {
-                System.out.print(RED + "Invalid Choice! Please enter a valid choice: " + RESET);
-                choice = input.nextInt();
-            }
+            choice = getChoice(characterList.length);
             switch (key) {
                 case "Archer":
                     Archer archer = new Archer(characterList[choice-1]);
