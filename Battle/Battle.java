@@ -68,6 +68,9 @@ public class Battle {
                 this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() + exchange);
                 this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() - exchange);
 
+                Utils.updateProfile(this.originalPlayer1, Utils.players);
+                Utils.updateProfile(this.originalPlayer2, Utils.players);
+
                 String result = String.format("""
                         =============================================================
                         %s has lost to %s   
@@ -260,6 +263,9 @@ public class Battle {
                 double exchange = 0.1*this.originalPlayer2.getCoins();
                 this.originalPlayer1.setCoins(this.originalPlayer1.getCoins() + exchange);
                 this.originalPlayer2.setCoins(this.originalPlayer2.getCoins() - exchange);
+
+                Utils.updateProfile(this.originalPlayer1, Utils.players);
+                Utils.updateProfile(this.originalPlayer2, Utils.players);
 
                 String result = String.format("""
                         =============================================================
