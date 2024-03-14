@@ -190,8 +190,6 @@ public class Battle {
                 // pause(2000);
                 Character player1_Defender = player1_DefenceList.get(0);
                 
-                System.out.println("Bonus "+ player2_Attacker.getbonus_attack());
-                System.out.println("Attack " + player2_Attacker.getAttack());
                 if (player2_Attacker instanceof Healer){
                     Character healingCharacter = Collections.min(player2_DefenceList, Comparator.comparingDouble(Character::getHealth));
                     player2_Attacker.attack(healingCharacter, 1);
