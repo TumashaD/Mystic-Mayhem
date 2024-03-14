@@ -15,6 +15,7 @@ public abstract class Character implements Serializable{
     protected int speed;
     protected int attack_priority;
     protected int defense_priority;
+    protected double bonus_turn;
 
     protected Armour armour;
     protected Artifact artifact;
@@ -26,7 +27,7 @@ public abstract class Character implements Serializable{
                     if(this.category == "Highlander"){
                         this.attack += 1;
                         this.defense += 1;
-                        this.attack += this.attack*0.2;
+                        this.bonus_turn = 0.2;
                     }
                     else if(this.category == "Marshlander"){
                         this.speed -= 1;
@@ -61,14 +62,15 @@ public abstract class Character implements Serializable{
             case "Arcane":
                 if(this.category == "Marshlander" || this.category == "Highlander"){
                         this.defense -= 1; 
-                        this.attack -= 1;          
+                        this.speed -= 1;          
                     }
                     else if(this.category == "Sunchild"){
                         this.attack -= 1;         
                     }
-                    else if(this.category ==" Mystic"){
-                        this.attack += 2;
+                    else if(this.category == "Mystic"){
+                        this.bonus_turn = 0.1;
                     }
+                    
                 break;
         
             default:

@@ -32,7 +32,7 @@ public class Player implements Serializable{
     public Player(String name, String userName, String homeGround){
         this.name = name;
         this.userName = userName;
-        this.coins = 500;
+        this.coins = 5000;
         this.homeGround = homeGround;
         this.xp = 1;
     }
@@ -159,7 +159,7 @@ public class Player implements Serializable{
     }
 
     public void setCoins(double coins){
-        this.coins = (int) coins;
+        this.coins = (int) Math.round(coins);
     }
     public int getCoins(){
         return coins;
@@ -259,6 +259,5 @@ public class Player implements Serializable{
 
         System.out.println(board.invalidate().build().getPreview());        
     }
-    
     
 }
