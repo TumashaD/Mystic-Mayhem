@@ -55,8 +55,7 @@ public class PlayGame extends Utils{
             Player oppponent = SelectProfile.showOpponents(player);
             Battle battle = new Battle(player, oppponent);
             System.out.println(battle.startBattle());
-            System.out.println("Press Enter to continue...");
-            input.nextLine();
+            System.out.print("Press Enter to continue...");
             input.nextLine();
             Utils.clearScreen();
             profileOptions(player);
